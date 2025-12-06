@@ -6,13 +6,21 @@ import {
   Popup,
   TileLayer,
 } from "react-leaflet";
-import { HandleClick } from "./components/HandleClick";
-import { CenterMapOnPosition } from "./components/CenterMapOnPosition";
+
+import { HandleClick } from "../../components/HandleClick";
+import { CenterMapOnPosition } from "../../components/CenterMapOnPosition";
+import { useAuthStore } from "../../hooks/useAuthStore";
 // --- 1. CONFIGURACIÓN INICIAL Y FALLBACK ---
 const DEFAULT_CENTER = [10.4806, -66.9036]; // Caracas, o una ubicación central conocida
 const INITIAL_ZOOM = 17;
 
-export const App = () => {
+export const DashboardWorker = () => {
+  const { startLogin } = useAuthStore();
+  const testUser = {
+    identityCard: "24172438",
+    password: "123456",
+  };
+
   const [route, setRoute] = useState([]);
   const [currentPosition, setCurrentPosition] = useState(DEFAULT_CENTER);
 
@@ -47,6 +55,7 @@ export const App = () => {
       >
         <button onClick={handleUndoLastLine}>Undo Last Line</button>
         <button onClick={handleSaveRoute}>Save Route</button>
+        <button onClick={() => startLogin(testUser)}>Login</button>
       </div>
       <MapContainer
         center={currentPosition}

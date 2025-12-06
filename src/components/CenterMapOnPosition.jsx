@@ -15,7 +15,7 @@ export const CenterMapOnPosition = ({ setCurrentPosition }) => {
 
       setCurrentPosition(myCurrentPosition);
 
-      //   console.log(myCurrentPosition);
+      console.log(myCurrentPosition);
     };
 
     const error = () => {
