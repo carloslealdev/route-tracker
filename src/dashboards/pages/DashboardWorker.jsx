@@ -10,6 +10,7 @@ import {
 import { HandleClick } from "../../components/HandleClick";
 import { CenterMapOnPosition } from "../../components/CenterMapOnPosition";
 import { useAuthStore } from "../../hooks/useAuthStore";
+import { useRoutegramStore } from "../../hooks/useRoutegramStore";
 // --- 1. CONFIGURACIÓN INICIAL Y FALLBACK ---
 const DEFAULT_CENTER = [10.4806, -66.9036]; // Caracas, o una ubicación central conocida
 const INITIAL_ZOOM = 17;
@@ -17,9 +18,11 @@ const INITIAL_ZOOM = 17;
 export const DashboardWorker = () => {
   const { startLogin } = useAuthStore();
   const testUser = {
-    identityCard: "24172438",
+    identityCard: "23423633",
     password: "123456",
   };
+
+  const { startLoadingMyRoutegrams } = useRoutegramStore();
 
   const [route, setRoute] = useState([]);
   const [currentPosition, setCurrentPosition] = useState(DEFAULT_CENTER);
@@ -38,52 +41,192 @@ export const DashboardWorker = () => {
     console.log(dataToSave);
   };
 
+  // return (
+  //   <div
+  //     style={{
+  //       display: "flex",
+  //       flexDirection: "column",
+  //       height: "500px",
+  //       width: "500px",
+  //     }}
+  //   >
+  //     <div
+  //       style={{
+  //         display: "flex",
+  //         justifyContent: "space-between",
+  //       }}
+  //     >
+  //       <button onClick={handleUndoLastLine}>Undo Last Line</button>
+  //       <button onClick={handleSaveRoute}>Save Route</button>
+  //       <button onClick={() => startLogin(testUser)}>Login</button>
+  //       <button onClick={() => startLoadingMyRoutegrams()}>
+  //         My Routegrams
+  //       </button>
+  //     </div>
+  //     <MapContainer
+  //       center={currentPosition}
+  //       // center={[10.18625, -67.46291]}
+  //       zoom={INITIAL_ZOOM}
+  //       scrollWheelZoom={true}
+  //       style={{ flex: 1, width: "100%" }}
+  //     >
+  //       <TileLayer
+  //         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  //         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  //       />
+
+  //       {/* Logica para capturar clicks */}
+  //       <HandleClick route={route} setRoute={setRoute} />
+
+  //       {/* Centrar mapa en la ubicacion actual */}
+  //       <CenterMapOnPosition setCurrentPosition={setCurrentPosition} />
+
+  //       {route.length > 1 && <Polyline positions={route} color="red" />}
+
+  //       <Marker position={currentPosition}>
+  //         <Popup>
+  //           {/* A pretty CSS3 popup. <br /> Easily customizable. */}
+  //           Current Position
+  //         </Popup>
+  //       </Marker>
+  //     </MapContainer>
+  //   </div>
+  // );
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "500px",
-        width: "500px",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <button onClick={handleUndoLastLine}>Undo Last Line</button>
-        <button onClick={handleSaveRoute}>Save Route</button>
-        <button onClick={() => startLogin(testUser)}>Login</button>
-      </div>
-      <MapContainer
-        center={currentPosition}
-        // center={[10.18625, -67.46291]}
-        zoom={INITIAL_ZOOM}
-        scrollWheelZoom={true}
-        style={{ flex: 1, width: "100%" }}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+    <>
+      <header className="nav-bar">
+        <div className="nav-bar-container">
+          <h2>RoutegramApp</h2>
+          <div className="nav-bar-info">
+            <h3>My Name</h3>
+            <button className="btn-logout">Logout</button>
+          </div>
+        </div>
+      </header>
 
-        {/* Logica para capturar clicks */}
-        <HandleClick route={route} setRoute={setRoute} />
+      <section className="body-container">
+        <div className="maps-container">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              height: "500px",
+              width: "500px",
+            }}
+          >
+            {/* <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <button onClick={handleUndoLastLine}>Undo Last Line</button>
+              <button onClick={handleSaveRoute}>Save Route</button>
+              <button onClick={() => startLogin(testUser)}>Login</button>
+              <button onClick={() => startLoadingMyRoutegrams()}>
+                My Routegrams
+              </button>
+            </div> */}
+            <MapContainer
+              center={currentPosition}
+              // center={[10.18625, -67.46291]}
+              zoom={INITIAL_ZOOM}
+              scrollWheelZoom={true}
+              style={{ flex: 1, width: "100%" }}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
 
-        {/* Centrar mapa en la ubicacion actual */}
-        <CenterMapOnPosition setCurrentPosition={setCurrentPosition} />
+              {/* Logica para capturar clicks */}
+              <HandleClick route={route} setRoute={setRoute} />
 
-        {route.length > 1 && <Polyline positions={route} color="red" />}
+              {/* Centrar mapa en la ubicacion actual */}
+              <CenterMapOnPosition setCurrentPosition={setCurrentPosition} />
 
-        <Marker position={currentPosition}>
-          <Popup>
-            {/* A pretty CSS3 popup. <br /> Easily customizable. */}
-            Current Position
-          </Popup>
-        </Marker>
-      </MapContainer>
-    </div>
+              {route.length > 1 && <Polyline positions={route} color="red" />}
+
+              <Marker position={currentPosition}>
+                <Popup>
+                  {/* A pretty CSS3 popup. <br /> Easily customizable. */}
+                  Current Position
+                </Popup>
+              </Marker>
+            </MapContainer>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              height: "500px",
+              width: "500px",
+            }}
+          >
+            {/* <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <button onClick={handleUndoLastLine}>Undo Last Line</button>
+              <button onClick={handleSaveRoute}>Save Route</button>
+              <button onClick={() => startLogin(testUser)}>Login</button>
+              <button onClick={() => startLoadingMyRoutegrams()}>
+                My Routegrams
+              </button>
+            </div> */}
+            <MapContainer
+              center={currentPosition}
+              // center={[10.18625, -67.46291]}
+              zoom={INITIAL_ZOOM}
+              scrollWheelZoom={true}
+              style={{ flex: 1, width: "100%" }}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+
+              {/* Logica para capturar clicks */}
+              <HandleClick route={route} setRoute={setRoute} />
+
+              {/* Centrar mapa en la ubicacion actual */}
+              <CenterMapOnPosition setCurrentPosition={setCurrentPosition} />
+
+              {route.length > 1 && <Polyline positions={route} color="red" />}
+
+              <Marker position={currentPosition}>
+                <Popup>
+                  {/* A pretty CSS3 popup. <br /> Easily customizable. */}
+                  Current Position
+                </Popup>
+              </Marker>
+            </MapContainer>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div className="actions-container">
+          <button className="btn-action" onClick={handleUndoLastLine}>
+            Undo Last Line
+          </button>
+          <button className="btn-action" onClick={handleSaveRoute}>
+            Save Route
+          </button>
+          <button className="btn-action" onClick={() => startLogin(testUser)}>
+            Login
+          </button>
+          <button
+            className="btn-action"
+            onClick={() => startLoadingMyRoutegrams()}
+          >
+            My Routegrams
+          </button>
+        </div>
+      </footer>
+    </>
   );
 };
