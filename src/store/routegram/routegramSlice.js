@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { onChecking } from "../auth/authSlice";
 
 export const routegramSlice = createSlice({
   name: "routegram",
@@ -7,6 +6,7 @@ export const routegramSlice = createSlice({
     isLoading: false,
     errorMessage: undefined,
     activeRoute: null,
+    loadedRoutes: [],
     isDrawing: false,
     draftPoints: [],
   },
@@ -19,7 +19,8 @@ export const routegramSlice = createSlice({
 
     onLoadRoutegram: (state, { payload }) => {
       state.isLoading = false;
-      state.activeRoute = payload;
+      // state.activeRoute = payload;
+      state.loadedRoutes = payload;
     },
 
     onSetDraftPoints: (state, { payload }) => {

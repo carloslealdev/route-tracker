@@ -7,4 +7,8 @@ export const store = configureStore({
     auth: authSlice.reducer,
     routegram: routegramSlice.reducer,
   },
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware({
+  //     serializableCheck: false,
+  //   }),
 });
