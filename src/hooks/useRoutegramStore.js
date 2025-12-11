@@ -27,7 +27,7 @@ export const useRoutegramStore = () => {
       const { routegrams } = data;
 
       dispatch(onLoadRoutegram(routegrams));
-      console.log(routegrams);
+      // console.log(routegrams);
     } catch (error) {
       console.log(error);
     }

@@ -117,6 +117,16 @@ button:focus-visible {
   gap: 16px;
 }
 
+.map-card {
+  display: flex;
+  flex-direction: column;
+  height: 700px;
+  width: 700px;
+  border-radius: 8px;
+  padding: 48px;
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
 footer {
   width: 100%;
   display: flex;
@@ -132,12 +142,26 @@ footer {
   width: 700px;
   background-color: orangered;
   display: flex;
-  /* flex-direction: column; */
   justify-content: space-around;
   align-items: center;
 }
 
 .btn-action {
   padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.no-map-available-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn-new-routegram {
+  background-color: orangered;
+  padding: 4px 24px;
   border-radius: 8px;
 }
