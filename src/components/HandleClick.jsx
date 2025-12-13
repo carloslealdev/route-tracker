@@ -1,10 +1,12 @@
 import { useMapEvent } from "react-leaflet";
+import { useRoutegramStore } from "../hooks/useRoutegramStore";
 
-export const HandleClick = ({ route, setRoute }) => {
+export const HandleClick = () => {
+  const { addPointToDraft } = useRoutegramStore();
   useMapEvent("click", (event) => {
     const { lat, lng } = event.latlng;
-    setRoute((prevRoute) => [...prevRoute, [lat, lng]]);
-    console.log(route);
+    const pointToDraft = [lat, lng];
+    addPointToDraft(pointToDraft);
   });
 
   return null;

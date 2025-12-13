@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import routeTrackerApi from "../api/routeTrackerApi";
 import {
+  onAddPointToDraft,
   onCheckingRoutegrams,
   onLoadRoutegram,
+  onRemoveLastPoint,
 } from "../store/routegram/routegramSlice";
 
 export const useRoutegramStore = () => {
@@ -32,6 +34,13 @@ export const useRoutegramStore = () => {
       console.log(error);
     }
   };
+  const addPointToDraft = (point) => {
+    dispatch(onAddPointToDraft(point));
+  };
+
+  const removeLastPoint = () => {
+    dispatch(onRemoveLastPoint());
+  };
 
   return {
     //*Propiedades
@@ -44,5 +53,7 @@ export const useRoutegramStore = () => {
 
     //*Métodos
     startLoadingMyRoutegrams,
+    addPointToDraft,
+    removeLastPoint,
   };
 };

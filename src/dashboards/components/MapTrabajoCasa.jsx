@@ -17,6 +17,7 @@ const DEFAULT_CENTER = [10.4806, -66.9036]; // Caracas, o una ubicación central
 const INITIAL_ZOOM = 17;
 
 export const MapTrabajoCasa = () => {
+  const typeRoutegram = "Trabajo-Casa";
   const { loadedRoutes } = useRoutegramStore();
 
   const myRouteTrabajoCasa =
@@ -32,7 +33,7 @@ export const MapTrabajoCasa = () => {
     <>
       {/* MAPA TRABAJO - CASA */}
       <div className="map-card">
-        <h1>Ruta Trabajo - Casa</h1>
+        <h1>Ruta {typeRoutegram}</h1>
         <span>Ultima fecha de actualizacion: {new Date().toISOString()}</span>
         {loadedRoutes.length > 0 &&
         (loadedRoutes[0]?.typeRoute === "Trabajo-Casa" ||
@@ -81,7 +82,7 @@ export const MapTrabajoCasa = () => {
             </Marker>
           </MapContainer>
         ) : (
-          <NoRoutegramAvailable />
+          <NoRoutegramAvailable typeRoutegram={typeRoutegram} />
         )}
       </div>
     </>

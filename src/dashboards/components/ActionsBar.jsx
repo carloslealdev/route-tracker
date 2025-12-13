@@ -4,11 +4,11 @@ import { useAuthStore } from "../../hooks/useAuthStore";
 import { useRoutegramStore } from "../../hooks/useRoutegramStore";
 
 export const ActionsBar = () => {
-  const { startLoadingMyRoutegrams } = useRoutegramStore();
+  const { startLoadingMyRoutegrams, removeLastPoint } = useRoutegramStore();
   const { startLogin } = useAuthStore();
 
   const handleUndoLastLine = () => {
-    setRoute((prevRoute) => prevRoute.slice(0, -1));
+    removeLastPoint();
   };
 
   const handleSaveRoute = () => {
