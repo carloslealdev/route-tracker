@@ -2,24 +2,36 @@ import { testUser } from "../../fixtures/testUser";
 import { reverseCoordinates } from "../../helpers/reverseCoordinates";
 import { useAuthStore } from "../../hooks/useAuthStore";
 import { useRoutegramStore } from "../../hooks/useRoutegramStore";
+import { useUiStore } from "../../hooks/useUiStore";
 
 export const ActionsBar = () => {
-  const { startLoadingMyRoutegrams, removeLastPoint } = useRoutegramStore();
-  const { startLogin } = useAuthStore();
+  const {
+    startLoadingMyRoutegrams,
+    removeLastPoint,
+    draftPoints,
+    startSavingRoutegram,
+  } = useRoutegramStore();
+  const { startLogin, user } = useAuthStore();
+  const { typeRoutegramToEdit, closeRoutegramModal } = useUiStore();
 
   const handleUndoLastLine = () => {
     removeLastPoint();
   };
 
-  const handleSaveRoute = () => {
+  const handleSaveRoute = async () => {
+    const coordinates = reverseCoordinates(draftPoints);
     const dataToSave = {
-      user: "Carlos",
-      date: new Date().toISOString(),
-      routegram: reverseCoordinates(route),
+      type: "LineString",
+      typeRoute: typeRoutegramToEdit,
+      coordinates: coordinates,
     };
 
-    console.log(dataToSave);
+    // console.log(dataToSave);
+
+    await startSavingRoutegram(dataToSave);
+    closeRoutegramModal();
   };
+
   return (
     <footer className="action-footer">
       <div className="actions-container">

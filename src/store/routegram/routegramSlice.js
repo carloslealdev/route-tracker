@@ -48,12 +48,26 @@ export const routegramSlice = createSlice({
       state.errorMessage = undefined;
     },
 
-    onRouteSaved: (state, { payload }) => {
+    onSaveRoutegram: (state, { payload }) => {
       state.isLoading = false;
       state.activeRoute = payload;
       state.draftPoints = [];
       state.isDrawing = false;
       state.errorMessage = undefined;
+
+      const index = state.loadedRoutes.findIndex(
+        (route) => route._id === payload._id
+      );
+
+      if (index !== -1) {
+        // ESCENARIO 1: ACTUALIZACIÓN
+        // Si ya existe (el ID coincide), reemplazamos el objeto viejo por el nuevo
+        state.loadedRoutes[index] = payload;
+      } else {
+        // ESCENARIO 2: CREACIÓN (Tu caso actual)
+        // Si no existe, la empujamos al final del array
+        state.loadedRoutes.push(payload);
+      }
     },
 
     onSetErrorMessage: (state, { payload }) => {
@@ -70,7 +84,7 @@ export const {
   onClearDraft,
   onLoadRoutegram,
   onRemoveLastPoint,
-  onRouteSaved,
+  onSaveRoutegram,
   onSavingRoute,
   onSetDraftPoints,
   onSetErrorMessage,

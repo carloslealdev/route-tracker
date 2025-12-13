@@ -5,7 +5,9 @@ import {
   onCheckingRoutegrams,
   onLoadRoutegram,
   onRemoveLastPoint,
+  onSaveRoutegram,
 } from "../store/routegram/routegramSlice";
+import Swal from "sweetalert2";
 
 export const useRoutegramStore = () => {
   const {
@@ -34,6 +36,20 @@ export const useRoutegramStore = () => {
       console.log(error);
     }
   };
+
+  const startSavingRoutegram = async (routegramInfo) => {
+    try {
+      const { data } = await routeTrackerApi.post("/routegrams", routegramInfo);
+      dispatch(onSaveRoutegram(data));
+      console.log(data);
+      dispatch;
+      Swal.fire("Rutagrama guardado con exito", "", "success");
+      dispatch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const addPointToDraft = (point) => {
     dispatch(onAddPointToDraft(point));
   };
@@ -53,6 +69,7 @@ export const useRoutegramStore = () => {
 
     //*Métodos
     startLoadingMyRoutegrams,
+    startSavingRoutegram,
     addPointToDraft,
     removeLastPoint,
   };

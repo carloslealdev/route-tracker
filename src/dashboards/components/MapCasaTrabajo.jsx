@@ -16,6 +16,7 @@ const DEFAULT_CENTER = [10.4806, -66.9036]; // Caracas, o una ubicación central
 const INITIAL_ZOOM = 17;
 
 export const MapCasaTrabajo = () => {
+  const typeRoutegram = "Casa-Trabajo";
   const [initialPointCasaTrabajo, setInitialPointCasaTrabajo] =
     useState(DEFAULT_CENTER);
 
@@ -26,11 +27,12 @@ export const MapCasaTrabajo = () => {
 
   //TODO ELIMINAR ese state y manejar las lineas de dibujo con la propiedad draftPoint del routegramSlice
   const [route, setRoute] = useState([]);
+
   return (
     <>
       {/* MAPA CASA - TRABAJO */}
       <div className="map-card">
-        <h1>Ruta Casa - Trabajo</h1>
+        <h1>Ruta {typeRoutegram}</h1>
         <span>Ultima fecha de actualizacion: {new Date().toISOString()}</span>
         {loadedRoutes.length > 0 &&
         (loadedRoutes[0].typeRoute === "Casa-Trabajo" ||
@@ -79,7 +81,7 @@ export const MapCasaTrabajo = () => {
             </Marker>
           </MapContainer>
         ) : (
-          <NoRoutegramAvailable />
+          <NoRoutegramAvailable typeRoutegram={typeRoutegram} />
         )}
       </div>
     </>
