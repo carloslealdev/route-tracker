@@ -129,6 +129,20 @@ button:focus-visible {
   background-color: rgba(128, 128, 128, 0.5);
 }
 
+.map-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.actions-map-buttons-container {
+  display: flex;
+  gap: 16px;
+  justify-content: end;
+}
+
 footer {
   width: 100%;
   display: flex;

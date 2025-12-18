@@ -3,9 +3,14 @@ import routeTrackerApi from "../api/routeTrackerApi";
 import {
   onAddPointToDraft,
   onCheckingRoutegrams,
+  onClearDraft,
   onLoadRoutegram,
   onRemoveLastPoint,
+  onResetActiveRoutegram,
   onSaveRoutegram,
+  onSavingRoute,
+  onSetActiveRoutegram,
+  onUpdateRoutegram,
 } from "../store/routegram/routegramSlice";
 import Swal from "sweetalert2";
 
@@ -37,14 +42,28 @@ export const useRoutegramStore = () => {
     }
   };
 
-  const startSavingRoutegram = async (routegramInfo) => {
+  const startSavingRoutegram = async (geoJsonData) => {
+    dispatch(onSavingRoute());
     try {
-      const { data } = await routeTrackerApi.post("/routegrams", routegramInfo);
+      const { data } = await routeTrackerApi.post("/routegrams", geoJsonData);
       dispatch(onSaveRoutegram(data));
       console.log(data);
-      dispatch;
+
       Swal.fire("Rutagrama guardado con exito", "", "success");
-      dispatch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const startUpdatingRoutegram = async (routegramId, newGeoJsonData) => {
+    dispatch(onSaveRoutegram());
+
+    try {
+      const { data } = await routeTrackerApi.put(
+        `routegrams/${routegramId}`,
+        newGeoJsonData
+      );
+      dispatch(onUpdateRoutegram(data.routegram));
     } catch (error) {
       console.log(error);
     }
@@ -58,6 +77,28 @@ export const useRoutegramStore = () => {
     dispatch(onRemoveLastPoint());
   };
 
+  const setActiveRoutegram = (routegram) => {
+    dispatch(onSetActiveRoutegram(routegram));
+  };
+
+  const resetActiveRoutegram = () => {
+    dispatch(onResetActiveRoutegram());
+  };
+
+  const clearDraftPoints = () => {
+    dispatch(onClearDraft());
+  };
+
+  // Buscamos la ruta Casa-Trabajo sin importar si está en la pos 0, 1 o 500
+  const routeCasaTrabajo = loadedRoutes.find(
+    (r) => r.typeRoute === "Casa-Trabajo"
+  );
+
+  // Buscamos la ruta Trabajo-Casa
+  const routeTrabajoCasa = loadedRoutes.find(
+    (r) => r.typeRoute === "Trabajo-Casa"
+  );
+
   return {
     //*Propiedades
     isLoading,
@@ -67,10 +108,18 @@ export const useRoutegramStore = () => {
     draftPoints,
     loadedRoutes,
 
+    //*Propiedades Computadas
+    routeCasaTrabajo,
+    routeTrabajoCasa,
+
     //*Métodos
     startLoadingMyRoutegrams,
     startSavingRoutegram,
+    startUpdatingRoutegram,
     addPointToDraft,
     removeLastPoint,
+    setActiveRoutegram,
+    resetActiveRoutegram,
+    clearDraftPoints,
   };
 };

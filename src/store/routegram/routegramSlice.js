@@ -50,29 +50,36 @@ export const routegramSlice = createSlice({
 
     onSaveRoutegram: (state, { payload }) => {
       state.isLoading = false;
-      state.activeRoute = payload;
+      state.activeRoute = null;
       state.draftPoints = [];
       state.isDrawing = false;
       state.errorMessage = undefined;
+      state.loadedRoutes.push(payload);
+    },
 
-      const index = state.loadedRoutes.findIndex(
-        (route) => route._id === payload._id
+    onUpdateRoutegram: (state, { payload }) => {
+      state.isLoading = false;
+      state.errorMessage = undefined;
+      state.isDrawing = false;
+      state.draftPoints = [];
+      state.activeRoute = null; // Cerramos el modal/limpiamos
+
+      // Buscamos y reemplazamos solo la ruta que cambió
+      state.loadedRoutes = state.loadedRoutes.map((route = {}) =>
+        route._id === payload._id ? payload : route
       );
-
-      if (index !== -1) {
-        // ESCENARIO 1: ACTUALIZACIÓN
-        // Si ya existe (el ID coincide), reemplazamos el objeto viejo por el nuevo
-        state.loadedRoutes[index] = payload;
-      } else {
-        // ESCENARIO 2: CREACIÓN (Tu caso actual)
-        // Si no existe, la empujamos al final del array
-        state.loadedRoutes.push(payload);
-      }
     },
 
     onSetErrorMessage: (state, { payload }) => {
       state.isLoading = false;
       state.errorMessage = payload;
+    },
+    onSetActiveRoutegram: (state, { payload }) => {
+      state.activeRoute = payload;
+    },
+
+    onResetActiveRoutegram: (state) => {
+      state.activeRoute = null;
     },
   },
 });
@@ -85,7 +92,10 @@ export const {
   onLoadRoutegram,
   onRemoveLastPoint,
   onSaveRoutegram,
+  onUpdateRoutegram,
   onSavingRoute,
   onSetDraftPoints,
   onSetErrorMessage,
+  onSetActiveRoutegram,
+  onResetActiveRoutegram,
 } = routegramSlice.actions;

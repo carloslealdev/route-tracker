@@ -4,6 +4,7 @@ import {
   Polyline,
   Popup,
   TileLayer,
+  GeoJSON,
 } from "react-leaflet";
 import { CenterMapOnPosition } from "../../components/CenterMapOnPosition";
 import { HandleClick } from "../../components/HandleClick";
@@ -17,8 +18,8 @@ const INITIAL_ZOOM = 17;
 export const Map = () => {
   const [currentPosition, setCurrentPosition] = useState(DEFAULT_CENTER);
 
-  const { draftPoints } = useRoutegramStore();
-  const { typeRoutegramToEdit } = useUiStore();
+  const { draftPoints, activeRoute } = useRoutegramStore();
+  const { typeRoutegramToEdit, isUpdating } = useUiStore();
   return (
     <div className="map-card">
       <h1>Nuevo Rutagrama {typeRoutegramToEdit}</h1>
@@ -43,6 +44,13 @@ export const Map = () => {
         <CenterMapOnPosition setCurrentPosition={setCurrentPosition} />
         {draftPoints.length > 0 && (
           <Polyline positions={draftPoints} color="red" />
+        )}
+
+        {isUpdating && (
+          <GeoJSON
+            data={activeRoute.location}
+            style={{ color: "blue", weight: 5 }}
+          />
         )}
 
         <Marker position={currentPosition}>

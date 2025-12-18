@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { useUiStore } from "../../hooks/useUiStore";
 import { Map } from "./Map";
 import { ActionsBar } from "./ActionsBar";
+import { useRoutegramStore } from "../../hooks/useRoutegramStore";
 
 const customStyles = {
   content: {
@@ -20,8 +21,12 @@ export const RoutegramModal = () => {
   const { isRoutegramModalOpen, closeRoutegramModal, typeRoutegramToEdit } =
     useUiStore();
 
+  const { resetActiveRoutegram, clearDraftPoints } = useRoutegramStore();
+
   const onCloseRoutegramModal = () => {
     closeRoutegramModal();
+    resetActiveRoutegram();
+    clearDraftPoints();
   };
 
   return (

@@ -10,6 +10,8 @@ export const ActionsBar = () => {
     removeLastPoint,
     draftPoints,
     startSavingRoutegram,
+    activeRoute,
+    startUpdatingRoutegram,
   } = useRoutegramStore();
   const { startLogin, user } = useAuthStore();
   const { typeRoutegramToEdit, closeRoutegramModal } = useUiStore();
@@ -18,7 +20,7 @@ export const ActionsBar = () => {
     removeLastPoint();
   };
 
-  const handleSaveRoute = async () => {
+  const handleSaveRoute = () => {
     const coordinates = reverseCoordinates(draftPoints);
     const dataToSave = {
       type: "LineString",
@@ -26,9 +28,14 @@ export const ActionsBar = () => {
       coordinates: coordinates,
     };
 
+    if (activeRoute && activeRoute._id) {
+      startUpdatingRoutegram(activeRoute._id, dataToSave);
+    } else {
+      startSavingRoutegram(dataToSave);
+    }
+
     // console.log(dataToSave);
 
-    await startSavingRoutegram(dataToSave);
     closeRoutegramModal();
   };
 
