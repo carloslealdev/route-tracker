@@ -29,7 +29,7 @@ export const MapTrabajoCasa = () => {
   const [route, setRoute] = useState([]);
 
   const handleUpdate = () => {
-    setActiveRoutegram(loadedRoutes[1]);
+    setActiveRoutegram(typeRoutegram);
 
     startUpdatingRoutegram();
   };

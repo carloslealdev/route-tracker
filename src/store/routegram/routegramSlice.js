@@ -74,8 +74,11 @@ export const routegramSlice = createSlice({
       state.isLoading = false;
       state.errorMessage = payload;
     },
+
     onSetActiveRoutegram: (state, { payload }) => {
-      state.activeRoute = payload;
+      state.activeRoute = state.loadedRoutes.find(
+        (route) => route.typeRoute === payload
+      );
     },
 
     onResetActiveRoutegram: (state) => {

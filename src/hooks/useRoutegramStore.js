@@ -56,7 +56,7 @@ export const useRoutegramStore = () => {
   };
 
   const startUpdatingRoutegram = async (routegramId, newGeoJsonData) => {
-    dispatch(onSaveRoutegram());
+    // dispatch(onSaveRoutegram());
 
     try {
       const { data } = await routeTrackerApi.put(
