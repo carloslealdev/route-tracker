@@ -84,6 +84,13 @@ export const routegramSlice = createSlice({
     onResetActiveRoutegram: (state) => {
       state.activeRoute = null;
     },
+
+    onDeleteRoutegram: (state, { payload }) => {
+      state.loadedRoutes = state.loadedRoutes.filter(
+        (route) => route._id !== payload
+      );
+      state.errorMessage = undefined;
+    },
   },
 });
 
@@ -101,4 +108,5 @@ export const {
   onSetErrorMessage,
   onSetActiveRoutegram,
   onResetActiveRoutegram,
+  onDeleteRoutegram,
 } = routegramSlice.actions;

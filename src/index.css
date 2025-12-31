@@ -196,6 +196,10 @@ footer {
   z-index: 999;
 }
 
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+  z-index: 1;
+}
+
 /* .modal-fondo {
   background-color: rgba(0, 0, 0, 0.3);
   bottom: 0;

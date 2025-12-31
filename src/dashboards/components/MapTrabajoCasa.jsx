@@ -12,6 +12,7 @@ import { HandleClick } from "../../components/HandleClick";
 import { CenterMapTrabajoCasa } from "../../components/CenterMapTrabajoCasa";
 import { NoRoutegramAvailable } from "./NoRoutegramAvailable";
 import { useUiStore } from "../../hooks/useUiStore";
+import Swal from "sweetalert2";
 
 const DEFAULT_CENTER = [10.4806, -66.9036]; // Caracas, o una ubicación central conocida
 const INITIAL_ZOOM = 17;
@@ -21,8 +22,12 @@ export const MapTrabajoCasa = () => {
   const [initialPointTrabajoCasa, setInitialPointTrabajoCasa] =
     useState(DEFAULT_CENTER);
 
-  const { loadedRoutes, setActiveRoutegram, routeTrabajoCasa } =
-    useRoutegramStore();
+  const {
+    loadedRoutes,
+    setActiveRoutegram,
+    routeTrabajoCasa,
+    startDeletingRoutegram,
+  } = useRoutegramStore();
   const { startUpdatingRoutegram } = useUiStore();
 
   //TODO ELIMINAR ese state y manejar las lineas de dibujo con la propiedad draftPoint del routegramSlice
@@ -32,6 +37,21 @@ export const MapTrabajoCasa = () => {
     setActiveRoutegram(typeRoutegram);
 
     startUpdatingRoutegram();
+  };
+  const handleDelete = () => {
+    Swal.fire({
+      title: "¿Quieres eliminar este rutagrama?",
+      text: "Esta acción no se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Eliminar rutagrama",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        startDeletingRoutegram(routeTrabajoCasa._id);
+      }
+    });
   };
 
   return (
@@ -75,7 +95,7 @@ export const MapTrabajoCasa = () => {
               </Marker>
             </MapContainer>
             <div className="actions-map-buttons-container">
-              <button>Delete</button>
+              <button onClick={handleDelete}>Delete</button>
               <button onClick={handleUpdate}>Update</button>
             </div>
           </div>

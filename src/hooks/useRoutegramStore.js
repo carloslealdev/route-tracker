@@ -4,6 +4,7 @@ import {
   onAddPointToDraft,
   onCheckingRoutegrams,
   onClearDraft,
+  onDeleteRoutegram,
   onLoadRoutegram,
   onRemoveLastPoint,
   onResetActiveRoutegram,
@@ -64,8 +65,21 @@ export const useRoutegramStore = () => {
         newGeoJsonData
       );
       dispatch(onUpdateRoutegram(data.routegram));
+
+      Swal.fire("Rutagrama actualizado con exito", "", "success");
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const startDeletingRoutegram = async (id) => {
+    try {
+      await routeTrackerApi.delete(`/routegrams/${id}`);
+      dispatch(onDeleteRoutegram(id));
+      Swal.fire("Rutagrama eliminado", "", "success");
+    } catch (error) {
+      console.log(error);
+      Swal.fire("No se pudo eliminar el rutagrama", "", "error");
     }
   };
 
@@ -116,6 +130,7 @@ export const useRoutegramStore = () => {
     startLoadingMyRoutegrams,
     startSavingRoutegram,
     startUpdatingRoutegram,
+    startDeletingRoutegram,
     addPointToDraft,
     removeLastPoint,
     setActiveRoutegram,
