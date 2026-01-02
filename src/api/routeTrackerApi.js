@@ -12,7 +12,7 @@ routeTrackerApi.interceptors.request.use((config) => {
     ...config.headers,
     "x-token": localStorage.getItem("token"),
   };
-
+  // console.log(config.headers);
   return config;
 });
 

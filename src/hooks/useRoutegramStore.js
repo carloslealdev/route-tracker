@@ -8,6 +8,7 @@ import {
   onLoadRoutegram,
   onRemoveLastPoint,
   onResetActiveRoutegram,
+  onResetLoadedRoutegrams,
   onSaveRoutegram,
   onSavingRoute,
   onSetActiveRoutegram,
@@ -99,6 +100,10 @@ export const useRoutegramStore = () => {
     dispatch(onResetActiveRoutegram());
   };
 
+  const resetLoadedRoutegrams = () => {
+    dispatch(onResetLoadedRoutegrams());
+  };
+
   const clearDraftPoints = () => {
     dispatch(onClearDraft());
   };
@@ -135,6 +140,7 @@ export const useRoutegramStore = () => {
     removeLastPoint,
     setActiveRoutegram,
     resetActiveRoutegram,
+    resetLoadedRoutegrams,
     clearDraftPoints,
   };
 };

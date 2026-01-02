@@ -25,7 +25,7 @@ export const useAuthStore = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("token-init-date", new Date().getTime());
 
-      dispatch(onLogin({ name: data.name, uid: data.uid }));
+      dispatch(onLogin({ name: data.name, uid: data.uid, role: data.role }));
     } catch (error) {
       dispatch(onLogout("Credenciales incorrectas"));
       setTimeout(() => {
@@ -67,12 +67,16 @@ export const useAuthStore = () => {
     if (!token) return dispatch(onLogout());
 
     try {
-      const { data } = routeTrackerApi.get("/auth/renew");
+      const { data } = await routeTrackerApi.get("/auth/renew");
+
+      console.log(data);
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("token-init-date", new Date().getTime());
 
-      dispatch(onLogin({ name: data.name, uid: data.uid }));
+      //TODO el role no viene en el JWT, lo cual me genera conflicto al estar
+      //TODO logueado como Admin y refrescar la pagina
+      dispatch(onLogin({ name: data.name, uid: data.uid, role: data.role }));
     } catch (error) {
       localStorage.clear();
       dispatch(onLogout());

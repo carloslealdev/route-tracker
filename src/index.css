@@ -228,3 +228,50 @@ footer {
   padding: 10px;
 } */
 /* Modal */
+
+.forms-container {
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.form-login-container,
+.form-register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: rgba(128, 128, 128, 0.5);
+  height: 320px;
+  min-width: 250px;
+}
+
+.form-login,
+.form-register {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-login input,
+.form-register input {
+  border: none;
+  border-radius: 8px;
+  height: 28px;
+  padding: 8px;
+}
+
+.btn-form {
+  margin-top: 16px;
+  font-family: inherit;
+  font-weight: bold;
+  background-color: orangered;
+  padding: 8px 32px;
+  border-radius: 8px;
+  /* margin-top: 16px; */
+}

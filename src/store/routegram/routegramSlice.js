@@ -81,6 +81,10 @@ export const routegramSlice = createSlice({
       );
     },
 
+    onResetLoadedRoutegrams: (state) => {
+      state.loadedRoutes = [];
+    },
+
     onResetActiveRoutegram: (state) => {
       state.activeRoute = null;
     },
@@ -108,5 +112,6 @@ export const {
   onSetErrorMessage,
   onSetActiveRoutegram,
   onResetActiveRoutegram,
+  onResetLoadedRoutegrams,
   onDeleteRoutegram,
 } = routegramSlice.actions;

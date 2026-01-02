@@ -1,4 +1,4 @@
 export const testUser = {
-  identityCard: "18044098",
+  identityCard: "12121212",
   password: "123456",
 };
