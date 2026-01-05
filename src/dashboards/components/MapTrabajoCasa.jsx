@@ -74,7 +74,7 @@ export const MapTrabajoCasa = () => {
               />
 
               {/* Logica para capturar clicks */}
-              <HandleClick route={route} setRoute={setRoute} />
+              {/* <HandleClick route={route} setRoute={setRoute} /> */}
 
               {/* Centrar mapa en la ubicacion actual */}
               <CenterMapTrabajoCasa

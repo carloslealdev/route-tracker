@@ -24,7 +24,7 @@ export const DashboardWorker = () => {
         </div>
       </section>
 
-      <ActionsBar />
+      {/* <ActionsBar /> */}
       <RoutegramModal />
     </>
   );

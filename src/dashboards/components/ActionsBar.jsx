@@ -43,12 +43,12 @@ export const ActionsBar = () => {
     <footer className="action-footer">
       <div className="actions-container">
         <button className="btn-action" onClick={handleUndoLastLine}>
-          Undo Last Line
+          Deshacer
         </button>
         <button className="btn-action" onClick={handleSaveRoute}>
-          Save Route
+          Guardar Rutagrama
         </button>
-        <button className="btn-action" onClick={() => startLogin(testUser)}>
+        {/* <button className="btn-action" onClick={() => startLogin(testUser)}>
           Login
         </button>
         <button
@@ -56,7 +56,7 @@ export const ActionsBar = () => {
           onClick={() => startLoadingMyRoutegrams()}
         >
           My Routegrams
-        </button>
+        </button> */}
       </div>
     </footer>
   );
