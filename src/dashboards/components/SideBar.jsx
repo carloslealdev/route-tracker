@@ -8,8 +8,12 @@ import {
   Typography,
   Divider,
 } from "@mui/material";
+import { useAdminStore } from "../../hooks/useAdminStore";
+import { WorkerCard } from "./WorkerCard";
 
 export const SideBar = () => {
+  const { users, isLoading, activeUser } = useAdminStore();
+
   const [filtersSelected, setFiltersSelected] = useState({
     active: false,
     withRoutegramCT: false,
@@ -90,6 +94,28 @@ export const SideBar = () => {
           </Stack>
         </Box>
         <Divider sx={{ width: "100%", my: "20px", backgroundColor: "gray" }} />
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            backgroundColor: "#25272cff",
+            width: "300px",
+            padding: "20px",
+            borderRadius: "10px",
+            gap: "8px",
+          }}
+        >
+          {users.map((user) => (
+            <WorkerCard
+              key={user._id}
+              name={user.name}
+              identityCard={user.identityCard}
+              routes={user.routegrams}
+            />
+          ))}
+        </Box>
       </Box>
     </>
   );

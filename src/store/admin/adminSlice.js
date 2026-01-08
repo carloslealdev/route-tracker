@@ -3,14 +3,26 @@ import { createSlice } from "@reduxjs/toolkit";
 export const adminSlice = createSlice({
   name: "admin",
   initialState: {
-    counter: 10,
+    users: [],
+    isLoading: false,
+    activeUser: null,
   },
   reducers: {
-    increment: (state /* action */) => {
-      state.counter += 1;
+    onLoadUsers: (state, { payload }) => {
+      state.users = payload;
+      state.isLoading = false;
+    },
+
+    onSetIsLoading: (state, { payload }) => {
+      state.isLoading = true;
+    },
+
+    onSetActiveUser: (state, { payload }) => {
+      state.activeUser = payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { increment } = adminSlice.actions;
+export const { onLoadUsers, onSetIsLoading, onSetActiveUser } =
+  adminSlice.actions;
