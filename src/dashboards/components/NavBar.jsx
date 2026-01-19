@@ -5,6 +5,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Typography } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import { styled, useTheme } from "@mui/material/styles";
+import { useAuthStore } from "../../hooks/useAuthStore";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useRoutegramStore } from "../../hooks/useRoutegramStore";
 
 const drawerWidth = 240;
 
@@ -34,8 +37,15 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export const NavBar = ({ open, setOpen }) => {
+  const { user, startLogout } = useAuthStore();
+  const { resetLoadedRoutegrams } = useRoutegramStore();
+
   const theme = useTheme();
 
+  const handleLogout = () => {
+    startLogout();
+    resetLoadedRoutegrams();
+  };
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -46,6 +56,7 @@ export const NavBar = ({ open, setOpen }) => {
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
+            disabled={user.role === "Worker"}
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -108,10 +119,15 @@ export const NavBar = ({ open, setOpen }) => {
                 sx={{ backgroundColor: "#94a3b8" }}
               />
               <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Typography variant="body1">Carlos Leal</Typography>
-                <Typography variant="body2">Administrador</Typography>
+                <Typography variant="body1">{user.name}</Typography>
+                <Typography variant="body2">{user.role}</Typography>
               </Box>
               <Avatar alt="Carlos Leal"></Avatar>
+              {user.role === "Worker" && (
+                <IconButton>
+                  <LogoutIcon color="error" onClick={handleLogout} />
+                </IconButton>
+              )}
             </Box>
           </Box>
         </Toolbar>

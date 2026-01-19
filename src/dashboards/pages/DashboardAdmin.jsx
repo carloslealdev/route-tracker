@@ -28,6 +28,13 @@ import { SideBar } from "../components/SideBar";
 import { indicatorsData } from "../../fixtures/indicatorsData";
 import { IndicatorDashboard } from "../components/IndicatorDashboard";
 import { styled } from "@mui/material/styles";
+import { Routes, Route } from "react-router-dom";
+import { Routegrams } from "../scenes/Routegrams";
+import { Employees } from "../scenes/Employees";
+import { Vehicles } from "../scenes/Vehicles";
+import { Dashboard } from "../scenes/Dashboard";
+import { Help } from "../scenes/Help";
+import { Settings } from "../scenes/Settings";
 
 const drawerWidth = 240;
 
@@ -59,11 +66,8 @@ export const DashboardAdmin = () => {
         }}
       >
         <DrawerHeader />
-        <Box
-          className="AQUII"
-          sx={{ display: "flex", width: "100%", gap: "20px" }}
-        >
-          <Box
+        <Box sx={{ display: "flex", width: "100%" }}>
+          {/* <Box
             sx={{
               width: "360px",
               display: "flex",
@@ -81,14 +85,23 @@ export const DashboardAdmin = () => {
                 // icon={indicator.icon}
               />
             ))}
-          </Box>
+          </Box> */}
           <Box
             sx={{
               width: "100%",
-              height: "100%",
-              backgroundColor: "red",
+              height: `calc(100dvh - 118px)`,
+              backgroundColor: "#1c1e26",
             }}
-          ></Box>
+          >
+            <Routes>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="rutagramas" element={<Routegrams />} />
+              <Route path="empleados" element={<Employees />} />
+              <Route path="vehiculos" element={<Vehicles />} />
+              <Route path="configuracion" element={<Settings />} />
+              <Route path="ayuda" element={<Help />} />
+            </Routes>
+          </Box>
         </Box>
       </Box>
     </Box>

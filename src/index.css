@@ -275,3 +275,83 @@ footer {
   border-radius: 8px;
   /* margin-top: 16px; */
 }
+
+/* Admin Dashboard */
+
+/* Contenedor principal del DataGrid */
+.dataGrid-adminDashboard {
+  background-color: transparent !important;
+  border: none !important;
+  color: white !important;
+}
+
+/* Eliminar borde de la raíz interna */
+.dataGrid-adminDashboard.MuiDataGrid-root {
+  border: none !important;
+}
+
+/* 1. Fila de encabezados completa */
+.dataGrid-adminDashboard .MuiDataGrid-columnHeaders {
+  background-color: transparent !important;
+  border-bottom: none !important;
+}
+
+/* 2. Celdas individuales del encabezado */
+.dataGrid-adminDashboard .MuiDataGrid-columnHeader {
+  background-color: #18005aff !important;
+  border-bottom: none !important;
+}
+
+/* Estilo de las celdas comunes */
+.dataGrid-adminDashboard .MuiDataGrid-cell {
+  border-bottom: none !important;
+}
+
+/* Footer (Contenedor de paginación) */
+.dataGrid-adminDashboard .MuiDataGrid-footerContainer {
+  border-top: none !important;
+  background-color: #18005aff !important;
+}
+
+/* 3. Evitar fondos en scroll o sticky */
+.dataGrid-adminDashboard .MuiDataGrid-columnHeaderRow {
+  background-color: transparent !important;
+}
+
+/* 4. Títulos e iconos */
+.dataGrid-adminDashboard .MuiDataGrid-columnHeaderTitle {
+  color: inherit !important;
+}
+
+.dataGrid-adminDashboard .MuiDataGrid-iconButtonContainer,
+.dataGrid-adminDashboard .MuiDataGrid-menuIcon {
+  color: inherit !important;
+}
+
+/* 5. Separadores de columnas (ocultos) */
+.dataGrid-adminDashboard .MuiDataGrid-columnSeparator {
+  display: none !important;
+}
+
+/* Efectos de Hover y Selección en Filas */
+.dataGrid-adminDashboard .MuiDataGrid-row:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dataGrid-adminDashboard .MuiDataGrid-row.Mui-selected {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.dataGrid-adminDashboard .MuiDataGrid-row.Mui-selected:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Toolbar y paginación */
+.dataGrid-adminDashboard .MuiToolbar-root {
+  color: white !important;
+}
+
+/* Asegurar que los iconos de la paginación sean blancos si es necesario */
+.dataGrid-adminDashboard .MuiTablePagination-actions {
+  color: white !important;
+}

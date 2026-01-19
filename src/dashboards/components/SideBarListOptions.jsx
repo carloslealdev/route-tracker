@@ -9,20 +9,28 @@ import SupportIcon from "@mui/icons-material/Support";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuthStore } from "../../hooks/useAuthStore";
 import { useRoutegramStore } from "../../hooks/useRoutegramStore";
+import { useNavigate } from "react-router-dom";
 
 export const SideBarListOptions = ({ open }) => {
   const { user, startLogout } = useAuthStore();
   const { resetLoadedRoutegrams } = useRoutegramStore();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     startLogout();
     resetLoadedRoutegrams();
   };
+
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
+
   return (
     <>
       <List>
         <ListItem disablePadding sx={{ display: "block" }}>
           <ListItemButton
+            onClick={() => handleNavigate("/configuracion")}
             sx={[
               {
                 minHeight: 48,
@@ -72,6 +80,7 @@ export const SideBarListOptions = ({ open }) => {
 
         <ListItem disablePadding sx={{ display: "block" }}>
           <ListItemButton
+            onClick={() => handleNavigate("/ayuda")}
             sx={[
               {
                 minHeight: 48,

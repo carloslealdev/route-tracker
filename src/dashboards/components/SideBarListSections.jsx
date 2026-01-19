@@ -7,13 +7,21 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import RouteIcon from "@mui/icons-material/Route";
 import PersonIcon from "@mui/icons-material/Person";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export const SideBarListSections = ({ open }) => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
+
   return (
     <>
       <List>
         <ListItem disablePadding sx={{ display: "block" }}>
           <ListItemButton
+            onClick={() => handleNavigate("/dashboard")}
             sx={[
               {
                 minHeight: 48,
@@ -58,11 +66,13 @@ export const SideBarListSections = ({ open }) => {
                     },
               ]}
             />
+            {/* <Link to="/dashboard" /> */}
           </ListItemButton>
         </ListItem>
 
         <ListItem disablePadding sx={{ display: "block" }}>
           <ListItemButton
+            onClick={() => handleNavigate("/rutagramas")}
             sx={[
               {
                 minHeight: 48,
@@ -107,11 +117,13 @@ export const SideBarListSections = ({ open }) => {
                     },
               ]}
             />
+            {/* <Link to="/dashboard/rutagramas" /> */}
           </ListItemButton>
         </ListItem>
 
         <ListItem disablePadding sx={{ display: "block" }}>
           <ListItemButton
+            onClick={() => handleNavigate("/empleados")}
             sx={[
               {
                 minHeight: 48,
@@ -156,11 +168,13 @@ export const SideBarListSections = ({ open }) => {
                     },
               ]}
             />
+            <Link to="/employees" />
           </ListItemButton>
         </ListItem>
 
         <ListItem disablePadding sx={{ display: "block" }}>
           <ListItemButton
+            onClick={() => handleNavigate("/vehiculos")}
             sx={[
               {
                 minHeight: 48,

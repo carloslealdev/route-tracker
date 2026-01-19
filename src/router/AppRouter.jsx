@@ -56,8 +56,8 @@ export const AppRouter = () => {
         </>
       ) : user.role === "Admin" ? (
         <>
-          <Route path="/dashboard/*" element={<DashboardAdmin />} />
-          <Route path="/*" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<DashboardAdmin />} />
+          <Route path="/*" element={<Navigate to="*" replace />} />
         </>
       ) : (
         <>
