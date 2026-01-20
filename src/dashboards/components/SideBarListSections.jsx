@@ -7,6 +7,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import RouteIcon from "@mui/icons-material/Route";
 import PersonIcon from "@mui/icons-material/Person";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export const SideBarListSections = ({ open }) => {
@@ -169,6 +170,56 @@ export const SideBarListSections = ({ open }) => {
               ]}
             />
             <Link to="/employees" />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem disablePadding sx={{ display: "block" }}>
+          <ListItemButton
+            onClick={() => handleNavigate("/registro")}
+            sx={[
+              {
+                minHeight: 48,
+                px: 2.5,
+              },
+              open
+                ? {
+                    justifyContent: "initial",
+                  }
+                : {
+                    justifyContent: "center",
+                  },
+            ]}
+          >
+            <ListItemIcon
+              sx={[
+                {
+                  minWidth: 0,
+                  justifyContent: "center",
+                  color: "#94a3b8",
+                },
+                open
+                  ? {
+                      mr: 3,
+                    }
+                  : {
+                      mr: "auto",
+                    },
+              ]}
+            >
+              <HowToRegIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Registro"
+              sx={[
+                open
+                  ? {
+                      opacity: 1,
+                    }
+                  : {
+                      opacity: 0,
+                    },
+              ]}
+            />
           </ListItemButton>
         </ListItem>
 

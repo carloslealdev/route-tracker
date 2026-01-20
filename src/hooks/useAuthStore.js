@@ -25,7 +25,17 @@ export const useAuthStore = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("token-init-date", new Date().getTime());
 
-      dispatch(onLogin({ name: data.name, uid: data.uid, role: data.role }));
+      dispatch(
+        onLogin({
+          name: data.name,
+          uid: data.uid,
+          role: data.role,
+          identityCard: data.identityCard,
+          email: data.email,
+          phone: data.phone,
+          address: data.address,
+        }),
+      );
     } catch (error) {
       dispatch(onLogout("Credenciales incorrectas"));
       setTimeout(() => {
@@ -76,7 +86,17 @@ export const useAuthStore = () => {
 
       //TODO el role no viene en el JWT, lo cual me genera conflicto al estar
       //TODO logueado como Admin y refrescar la pagina
-      dispatch(onLogin({ name: data.name, uid: data.uid, role: data.role }));
+      dispatch(
+        onLogin({
+          name: data.name,
+          uid: data.uid,
+          role: data.role,
+          identityCard: data.identityCard,
+          email: data.email,
+          phone: data.phone,
+          address: data.address,
+        }),
+      );
     } catch (error) {
       localStorage.clear();
       dispatch(onLogout());

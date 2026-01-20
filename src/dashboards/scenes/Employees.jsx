@@ -16,16 +16,28 @@ export const Employees = () => {
       flex: 1,
     },
     {
-      field: "name",
+      field: "firstName",
       headerName: "Nombre",
       flex: 1,
     },
     {
-      field: "identityCard",
-      headerName: "Cedula",
-      // type: "number",
-      headerAlign: "left",
-      align: "left",
+      field: "lastName",
+      headerName: "Apellido",
+      flex: 1,
+    },
+    {
+      field: "phone",
+      headerName: "Telefono",
+      flex: 1,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 1,
+    },
+    {
+      field: "address",
+      headerName: "Direccion",
       flex: 1,
     },
     {
@@ -55,16 +67,6 @@ export const Employees = () => {
         );
       },
     },
-    // {
-    //   field: "phone",
-    //   headerName: "Telefono",
-    //   flex: 1,
-    // },
-    // {
-    //   field: "email",
-    //   headerName: "Email",
-    //   flex: 1,
-    // },
     {
       field: "role",
       headerName: "Rol",
@@ -110,7 +112,7 @@ export const Employees = () => {
           className="dataGrid-adminDashboard"
           rows={users}
           columns={columns}
-          getRowId={(row) => row._id}
+          getRowId={(row) => row.identityCard}
         />
         {console.log(users)}
       </Box>

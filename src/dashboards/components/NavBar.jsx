@@ -122,7 +122,7 @@ export const NavBar = ({ open, setOpen }) => {
                 <Typography variant="body1">{user.name}</Typography>
                 <Typography variant="body2">{user.role}</Typography>
               </Box>
-              <Avatar alt="Carlos Leal"></Avatar>
+              <Avatar alt={user.firstName}></Avatar>
               {user.role === "Worker" && (
                 <IconButton>
                   <LogoutIcon color="error" onClick={handleLogout} />

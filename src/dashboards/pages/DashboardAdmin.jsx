@@ -35,6 +35,7 @@ import { Vehicles } from "../scenes/Vehicles";
 import { Dashboard } from "../scenes/Dashboard";
 import { Help } from "../scenes/Help";
 import { Settings } from "../scenes/Settings";
+import { Register } from "../scenes/Register";
 
 const drawerWidth = 240;
 
@@ -97,6 +98,7 @@ export const DashboardAdmin = () => {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="rutagramas" element={<Routegrams />} />
               <Route path="empleados" element={<Employees />} />
+              <Route path="registro" element={<Register />} />
               <Route path="vehiculos" element={<Vehicles />} />
               <Route path="configuracion" element={<Settings />} />
               <Route path="ayuda" element={<Help />} />
