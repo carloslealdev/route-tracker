@@ -6,6 +6,7 @@ export const routegramSlice = createSlice({
     isLoading: false,
     errorMessage: undefined,
     activeRoute: null,
+    activeRouteScene: null,
     loadedRoutes: [],
     isDrawing: false,
     draftPoints: [],
@@ -66,7 +67,7 @@ export const routegramSlice = createSlice({
 
       // Buscamos y reemplazamos solo la ruta que cambió
       state.loadedRoutes = state.loadedRoutes.map((route = {}) =>
-        route._id === payload._id ? payload : route
+        route._id === payload._id ? payload : route,
       );
     },
 
@@ -77,12 +78,19 @@ export const routegramSlice = createSlice({
 
     onSetActiveRoutegram: (state, { payload }) => {
       state.activeRoute = state.loadedRoutes.find(
-        (route) => route.typeRoute === payload
+        (route) => route.typeRoute === payload,
       );
+      // state.activeRoute = payload;
+    },
+
+    onSetRougramScene: (state, { payload }) => {
+      state.activeRouteScene = payload;
     },
 
     onResetLoadedRoutegrams: (state) => {
       state.loadedRoutes = [];
+      state.activeRouteScene = null;
+      state.activeRoute = null;
     },
 
     onResetActiveRoutegram: (state) => {
@@ -91,7 +99,7 @@ export const routegramSlice = createSlice({
 
     onDeleteRoutegram: (state, { payload }) => {
       state.loadedRoutes = state.loadedRoutes.filter(
-        (route) => route._id !== payload
+        (route) => route._id !== payload,
       );
       state.errorMessage = undefined;
     },
@@ -114,4 +122,5 @@ export const {
   onResetActiveRoutegram,
   onResetLoadedRoutegrams,
   onDeleteRoutegram,
+  onSetRougramScene,
 } = routegramSlice.actions;

@@ -5,6 +5,6 @@ import { RouteTrackerApp } from "./RouteTrackerApp";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouteTrackerApp />
-  </StrictMode>
+    <RouteTrackerApp />,
+  </StrictMode>,
 );

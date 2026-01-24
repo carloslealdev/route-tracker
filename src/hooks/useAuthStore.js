@@ -6,6 +6,7 @@ import {
   onLogin,
   onLogout,
 } from "../store/auth/authSlice";
+import Swal from "sweetalert2";
 
 export const useAuthStore = () => {
   const { status, user, errorMessage } = useSelector((state) => state.auth);
@@ -44,22 +45,36 @@ export const useAuthStore = () => {
     }
   };
 
-  const startRegister = async ({ name, identityCard, password }) => {
-    dispatch(onChecking());
-
+  const startRegister = async ({
+    firstName,
+    lastName,
+    email,
+    identityCard,
+    password,
+    phone,
+    address,
+    role,
+  }) => {
     try {
       const { data } = await routeTrackerApi.post("/auth/new", {
-        name,
+        firstName,
+        lastName,
+        email,
         identityCard,
         password,
+        phone,
+        address,
+        role,
       });
 
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("token-init-date", new Date().getTime());
-
-      dispatch(onLogin({ name: data.name, uid: data.uid, role: data.role }));
+      Swal.fire(
+        "Usuario registrado",
+        "Usuario registrado exitosamente",
+        "success",
+      );
     } catch (error) {
-      dispatch(onLogout(error.response.data.msg || ""));
+      // dispatch(onLogout(error.response.data.msg || ""));
+      Swal.fire("Error en registro", "Error al registrar usuario", "error");
       setTimeout(() => {
         dispatch(onClearErrorMessage());
       }, 10);

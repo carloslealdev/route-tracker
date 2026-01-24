@@ -12,6 +12,7 @@ import {
   onSaveRoutegram,
   onSavingRoute,
   onSetActiveRoutegram,
+  onSetRougramScene,
   onUpdateRoutegram,
 } from "../store/routegram/routegramSlice";
 import Swal from "sweetalert2";
@@ -24,6 +25,7 @@ export const useRoutegramStore = () => {
     loadedRoutes,
     isDrawing,
     draftPoints,
+    activeRouteScene,
   } = useSelector((state) => state.routegram);
 
   const dispatch = useDispatch();
@@ -63,7 +65,7 @@ export const useRoutegramStore = () => {
     try {
       const { data } = await routeTrackerApi.put(
         `routegrams/${routegramId}`,
-        newGeoJsonData
+        newGeoJsonData,
       );
       dispatch(onUpdateRoutegram(data.routegram));
 
@@ -96,6 +98,10 @@ export const useRoutegramStore = () => {
     dispatch(onSetActiveRoutegram(routegram));
   };
 
+  const setActiveRoutegramScene = (routegram) => {
+    dispatch(onSetRougramScene(routegram));
+  };
+
   const resetActiveRoutegram = () => {
     dispatch(onResetActiveRoutegram());
   };
@@ -110,12 +116,12 @@ export const useRoutegramStore = () => {
 
   // Buscamos la ruta Casa-Trabajo sin importar si está en la pos 0, 1 o 500
   const routeCasaTrabajo = loadedRoutes.find(
-    (r) => r.typeRoute === "Casa-Trabajo"
+    (r) => r.typeRoute === "Casa-Trabajo",
   );
 
   // Buscamos la ruta Trabajo-Casa
   const routeTrabajoCasa = loadedRoutes.find(
-    (r) => r.typeRoute === "Trabajo-Casa"
+    (r) => r.typeRoute === "Trabajo-Casa",
   );
 
   return {
@@ -126,6 +132,7 @@ export const useRoutegramStore = () => {
     isDrawing,
     draftPoints,
     loadedRoutes,
+    activeRouteScene,
 
     //*Propiedades Computadas
     routeCasaTrabajo,
@@ -139,6 +146,7 @@ export const useRoutegramStore = () => {
     addPointToDraft,
     removeLastPoint,
     setActiveRoutegram,
+    setActiveRoutegramScene,
     resetActiveRoutegram,
     resetLoadedRoutegrams,
     clearDraftPoints,

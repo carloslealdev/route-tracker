@@ -4,12 +4,18 @@ export const adminSlice = createSlice({
   name: "admin",
   initialState: {
     users: [],
+    routegrams: [],
     isLoading: false,
     activeUser: null,
   },
   reducers: {
     onLoadUsers: (state, { payload }) => {
       state.users = payload;
+      state.isLoading = false;
+    },
+
+    onLoadRoutegrams: (state, { payload }) => {
+      state.routegrams = payload;
       state.isLoading = false;
     },
 
@@ -24,5 +30,9 @@ export const adminSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { onLoadUsers, onSetIsLoading, onSetActiveUser } =
-  adminSlice.actions;
+export const {
+  onLoadUsers,
+  onLoadRoutegrams,
+  onSetIsLoading,
+  onSetActiveUser,
+} = adminSlice.actions;

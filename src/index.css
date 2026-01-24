@@ -73,6 +73,10 @@ button:focus-visible {
   box-sizing: border-box;
 }
 
+/* * {
+  outline: 1px solid rgba(255, 0, 0, 0.2) !important;
+} */
+
 #map {
   height: 180px;
 }

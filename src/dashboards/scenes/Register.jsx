@@ -1,17 +1,24 @@
-import { Box, Button, TextField, useMediaQuery } from "@mui/material";
+import { Box, Button, MenuItem, TextField, useMediaQuery } from "@mui/material";
 import { Header } from "../components/Header";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useAuthStore } from "../../hooks/useAuthStore";
 
 const initialValues = {
   firstName: "",
   lastName: "",
-  identityCard: "",
-  phone: "",
   email: "",
+  identityCard: "",
+  password: "",
+  phone: "",
   address: "",
   role: "",
 };
+
+const roles = [
+  { id: "Admin", name: "Administrador" },
+  { id: "Worker", name: "Trabajador" },
+];
 
 const phoneRegExp =
   /^\+?([0-9]{1,4})?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})$/;
@@ -19,6 +26,9 @@ const phoneRegExp =
 const userSchema = Yup.object({
   firstName: Yup.string().required("Nombre es requerido"),
   lastName: Yup.string().required("Apellido es requerido"),
+  password: Yup.string()
+    .min(6, "La contraseña debe tener al menos 6 caracteres")
+    .required("Contraseña es requerida"),
   identityCard: Yup.string().required("Cédula es requerida"),
   phone: Yup.string()
     .matches(phoneRegExp, "Telefono no es valido")
@@ -31,9 +41,21 @@ const userSchema = Yup.object({
 });
 
 export const Register = () => {
+  const { startRegister } = useAuthStore();
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = (values, { resetForm }) => {
     console.log(values);
+    startRegister({
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      identityCard: values.identityCard,
+      password: values.password,
+      phone: values.phone,
+      address: values.address,
+      role: values.role,
+    });
+    resetForm();
   };
 
   return (
@@ -52,6 +74,7 @@ export const Register = () => {
           handleBlur,
           handleChange,
           handleSubmit,
+          resetForm,
         }) => (
           <form onSubmit={handleSubmit}>
             <Box
@@ -148,15 +171,56 @@ export const Register = () => {
                   gridColumn: "span 2",
                 }}
               />
+
+              <TextField
+                variant="filled"
+                // type="text"
+                select
+                label="Seleccionar Rol"
+                name="role"
+                value={values.role}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={!!touched.role && !!errors.role}
+                helperText={touched.role && errors.role}
+                defaultValue={""}
+                sx={{
+                  gridColumn: "span 2",
+                }}
+              >
+                {roles.map((role) => (
+                  <MenuItem key={role.id} value={role.id}>
+                    {role.name}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+              <TextField
+                variant="filled"
+                type="password"
+                label="Contraseña"
+                name="password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={!!touched.password && !!errors.password}
+                helperText={touched.password && errors.password}
+                sx={{
+                  gridColumn: "span 2",
+                }}
+              />
+            </Box>
+
+            <Box
+              sx={{ mt: "20px", display: "flex", justifyContent: "flex-end" }}
+            >
+              <Button type="submit" variant="contained">
+                Crear Usuario
+              </Button>
             </Box>
           </form>
         )}
       </Formik>
-      <Box sx={{ mt: "20px", display: "flex", justifyContent: "flex-end" }}>
-        <Button type="submit" variant="contained">
-          Crear Usuario
-        </Button>
-      </Box>
     </Box>
   );
 };

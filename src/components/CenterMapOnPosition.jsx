@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
+import { useRoutegramStore } from "../hooks/useRoutegramStore";
 
 export const CenterMapOnPosition = ({ setCurrentPosition }) => {
   const map = useMap();
+  const { activeRouteScene } = useRoutegramStore();
 
   useEffect(() => {
     //*LOGICA PARA TOMAR LA POSICION ACTUAL SEGUN EL NAVEGADOR
@@ -26,6 +28,6 @@ export const CenterMapOnPosition = ({ setCurrentPosition }) => {
     }
 
     //*LOGICA PARA TOMAR LA POSICION ACTUAL SEGUN EL NAVEGADOR
-  }, [map, setCurrentPosition]);
+  }, [map, setCurrentPosition, activeRouteScene]);
   return null;
 };

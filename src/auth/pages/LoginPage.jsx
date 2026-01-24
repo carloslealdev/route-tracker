@@ -16,41 +16,17 @@ const registerFormFields = {
 };
 
 export const LoginPage = () => {
-  const { startLogin, startRegister, errorMessage } = useAuthStore();
+  const { startLogin, errorMessage } = useAuthStore();
 
   const {
     loginCedula,
     loginPassword,
     onInputChange: onLoginInputChange,
   } = useForm(loginFormFields);
-  const {
-    registerName,
-    registerCedula,
-    registerPassword1,
-    registerPassword2,
-    onInputChange: onRegisterInputChange,
-  } = useForm(registerFormFields);
 
   const loginSubmit = (event) => {
     event.preventDefault();
     startLogin({ identityCard: loginCedula, password: loginPassword });
-  };
-
-  const registerSubmit = (event) => {
-    event.preventDefault();
-    if (registerPassword1 !== registerPassword2) {
-      Swal.fire(
-        "Error en registro",
-        "Las contraseñas deben coincidir",
-        "error"
-      );
-      return;
-    }
-    startRegister({
-      name: registerName,
-      identityCard: registerCedula,
-      password: registerPassword1,
-    });
   };
 
   return (
@@ -75,43 +51,6 @@ export const LoginPage = () => {
             />
             <button className="btn-form" type="submit">
               Ingresar
-            </button>
-          </form>
-        </div>
-
-        <div className="form-register-container">
-          <h2>Registro</h2>
-          <form className="form-register" onSubmit={registerSubmit}>
-            <input
-              type="text"
-              placeholder="Nombre"
-              name="registerName"
-              value={registerName}
-              onChange={onRegisterInputChange}
-            />
-            <input
-              type="text"
-              placeholder="Cédula"
-              name="registerCedula"
-              value={registerCedula}
-              onChange={onRegisterInputChange}
-            />
-            <input
-              type="password"
-              placeholder="Contraseña"
-              name="registerPassword1"
-              value={registerPassword1}
-              onChange={onRegisterInputChange}
-            />
-            <input
-              type="password"
-              placeholder="Repite la contraseña"
-              name="registerPassword2"
-              value={registerPassword2}
-              onChange={onRegisterInputChange}
-            />
-            <button className="btn-form" type="submit">
-              Registrar Usuario
             </button>
           </form>
         </div>

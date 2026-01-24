@@ -11,7 +11,7 @@ import { useAdminStore } from "../../hooks/useAdminStore";
 export const Employees = () => {
   const columns = [
     {
-      field: "_id",
+      field: "identityCard",
       headerName: "ID",
       flex: 1,
     },
