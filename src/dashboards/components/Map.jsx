@@ -23,7 +23,7 @@ export const Map = () => {
   return (
     <div className="map-card">
       <h1>Nuevo Rutagrama {typeRoutegramToEdit}</h1>
-
+      {console.log(typeRoutegramToEdit)}
       <MapContainer
         center={currentPosition}
         // center={[10.18625, -67.46291]}

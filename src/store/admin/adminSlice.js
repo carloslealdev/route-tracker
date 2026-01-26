@@ -26,6 +26,17 @@ export const adminSlice = createSlice({
     onSetActiveUser: (state, { payload }) => {
       state.activeUser = payload;
     },
+    onDeleteUser: (state, { payload }) => {
+      state.users = state.users.filter((user) => user._id !== payload);
+      state.isLoading = false;
+    },
+
+    onUpdateUser: (state, { payload }) => {
+      state.users = state.users.map((user) =>
+        user?._id === payload?._id ? payload : user,
+      );
+      state.isLoading = false;
+    },
   },
 });
 
@@ -35,4 +46,6 @@ export const {
   onLoadRoutegrams,
   onSetIsLoading,
   onSetActiveUser,
+  onDeleteUser,
+  onUpdateUser,
 } = adminSlice.actions;

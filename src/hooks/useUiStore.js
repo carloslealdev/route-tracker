@@ -1,16 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   onCloseRoutegramModal,
+  onCloseUserInfoModal,
   onOpenRoutegramModal,
+  onOpenUserInfoModal,
   onUpdating,
 } from "../store/ui/uiSlice";
 
 export const useUiStore = () => {
   const dispatch = useDispatch();
 
-  const { isRoutegramModalOpen, typeRoutegramToEdit, isUpdating } = useSelector(
-    (state) => state.ui
-  );
+  const {
+    isRoutegramModalOpen,
+    typeRoutegramToEdit,
+    isUpdating,
+    isUserInfoModalOpen,
+  } = useSelector((state) => state.ui);
 
   const openRoutegramModal = (typeRoute) => {
     dispatch(onOpenRoutegramModal(typeRoute));
@@ -20,8 +25,16 @@ export const useUiStore = () => {
     dispatch(onCloseRoutegramModal());
   };
 
-  const startUpdatingRoutegram = () => {
-    dispatch(onUpdating());
+  const startUpdatingRoutegram = (typeRoute) => {
+    dispatch(onUpdating(typeRoute));
+  };
+
+  const openUserInfoModal = () => {
+    dispatch(onOpenUserInfoModal());
+  };
+
+  const closeUserInfoModal = () => {
+    dispatch(onCloseUserInfoModal());
   };
 
   return {
@@ -29,10 +42,13 @@ export const useUiStore = () => {
     isRoutegramModalOpen,
     typeRoutegramToEdit,
     isUpdating,
+    isUserInfoModalOpen,
 
     //*Métodos
     openRoutegramModal,
     closeRoutegramModal,
     startUpdatingRoutegram,
+    openUserInfoModal,
+    closeUserInfoModal,
   };
 };

@@ -36,7 +36,7 @@ export const RoutegramModal = () => {
       style={customStyles}
       //   className="modal"
     >
-      {/* <h2 style={{ color: "black" }}>{typeRoutegramToEdit}</h2> */}
+      <h2 style={{ color: "black" }}>{typeRoutegramToEdit}</h2>
       <Map />
       <ActionsBar />
     </Modal>

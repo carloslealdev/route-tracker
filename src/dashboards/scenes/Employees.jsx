@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, Chip, Typography } from "@mui/material";
+import { Box, Button, Chip, Typography } from "@mui/material";
 import { mockDataTeam } from "../../fixtures/mockData";
 import SecurityIcon from "@mui/icons-material/Security";
 import PersonIcon from "@mui/icons-material/Person";
 import routeTrackerApi from "../../api/routeTrackerApi";
 import { useAdminStore } from "../../hooks/useAdminStore";
+import Swal from "sweetalert2";
+import { FormEditUserInfoModal } from "../components/FormEditUserInfoModal";
+import { useUiStore } from "../../hooks/useUiStore";
 
 export const Employees = () => {
   const columns = [
@@ -49,7 +52,7 @@ export const Employees = () => {
       renderCell: ({ row: { routegrams } }) => {
         return (
           <Box
-            width="40%"
+            width="100%"
             m="5px auto"
             p="5px"
             display="flex"
@@ -76,12 +79,12 @@ export const Employees = () => {
       renderCell: ({ row: { role } }) => {
         return (
           <Box
-            width="40%"
+            width="100%"
             m="8px auto"
             p="5px"
             display="flex"
             justifyContent="center"
-            backgroundColor={role === "admin" ? "#008307ff" : "#005504ff"}
+            backgroundColor={role === "Admin" ? "#008307ff" : "#005504ff"}
             borderRadius="4px"
           >
             {role === "Admin" ? <SecurityIcon /> : <PersonIcon />}
@@ -90,15 +93,71 @@ export const Employees = () => {
         );
       },
     },
+    {
+      field: "actions",
+      headerName: "Acciones",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      renderCell: ({ row }) => {
+        return (
+          <Box display="flex" gap={2} m="8px">
+            <Button variant="contained" onClick={() => handleEditUser(row)}>
+              Editar
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => handleDeleteUser(row._id)}
+            >
+              Eliminar
+            </Button>
+          </Box>
+        );
+      },
+    },
   ];
 
-  const { startLoadingUsers, users, isLoading } = useAdminStore();
+  const {
+    startLoadingUsers,
+    users,
+    isLoading,
+    setActiveUser,
+    startDeletingUser,
+  } = useAdminStore();
+
+  const { openUserInfoModal } = useUiStore();
 
   useEffect(() => {
     startLoadingUsers();
   }, []);
 
   if (isLoading) return <h1>Loading...</h1>;
+
+  const handleSetActiveUser = (user) => {
+    setActiveUser(user);
+  };
+
+  const handleEditUser = (user) => {
+    setActiveUser(user);
+    openUserInfoModal();
+  };
+
+  const handleDeleteUser = (id) => {
+    Swal.fire({
+      title: "¿Estás seguro de eliminar este usuario?",
+      text: "Esta acción no se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        startDeletingUser(id);
+      }
+    });
+  };
 
   return (
     <Box>
@@ -114,8 +173,9 @@ export const Employees = () => {
           columns={columns}
           getRowId={(row) => row.identityCard}
         />
-        {console.log(users)}
       </Box>
+
+      <FormEditUserInfoModal />
     </Box>
   );
 };

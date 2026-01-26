@@ -68,7 +68,13 @@ export const Routegrams = () => {
               <ListItem key={routegram._id} disablePadding sx={{ mb: "10px" }}>
                 <ListItemButton
                   onClick={() => setActiveRoutegramScene(routegram)}
-                  selected={activeRouteScene?._id === routegram._id} //TODO: Esta seleccion no esta funcionando
+                  selected={activeRouteScene?._id === routegram._id}
+                  sx={{
+                    "&.Mui-selected": {
+                      // backgroundColor: "#42474e",
+                      borderRadius: "10px",
+                    },
+                  }}
                 >
                   <Card
                     sx={{
@@ -148,7 +154,7 @@ export const Routegrams = () => {
         </Box>
         <Box
           sx={{
-            width: "70%",
+            width: "60%",
             flexGrow: 1,
             // overflow: "auto", // Map usually handles its own zoom/pan, but keep if needed
             p: 2,

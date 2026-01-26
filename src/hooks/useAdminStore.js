@@ -1,10 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
+  onDeleteUser,
   onLoadRoutegrams,
   onLoadUsers,
+  onSetActiveUser,
   onSetIsLoading,
+  onUpdateUser,
 } from "../store/admin/adminSlice";
 import routeTrackerApi from "../api/routeTrackerApi";
+import Swal from "sweetalert2";
 
 export const useAdminStore = () => {
   const { users, routegrams, isLoading, activeUser } = useSelector(
@@ -34,6 +38,32 @@ export const useAdminStore = () => {
     }
   };
 
+  const setActiveUser = (user) => {
+    dispatch(onSetActiveUser(user));
+  };
+
+  const startDeletingUser = async (id) => {
+    dispatch(onSetIsLoading());
+
+    try {
+      const { data } = await routeTrackerApi.delete(`/users/${id}`);
+      dispatch(onDeleteUser(data.user));
+    } catch (error) {
+      console.log("Error al eliminar usuario", error);
+    }
+  };
+
+  const startUpdatingUser = async (id, user) => {
+    dispatch(onSetIsLoading());
+
+    try {
+      const { data } = await routeTrackerApi.put(`/users/${id}`, user);
+      dispatch(onUpdateUser(data.user));
+    } catch (error) {
+      console.log("Error al actualizar usuario", error);
+    }
+  };
+
   return {
     //*Propiedades
     users,
@@ -43,5 +73,8 @@ export const useAdminStore = () => {
     //*Métodos
     startLoadingUsers,
     startLoadingRoutegrams,
+    setActiveUser,
+    startDeletingUser,
+    startUpdatingUser,
   };
 };

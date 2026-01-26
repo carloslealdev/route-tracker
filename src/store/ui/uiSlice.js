@@ -6,6 +6,7 @@ export const uiSlice = createSlice({
     isRoutegramModalOpen: false,
     typeRoutegramToEdit: null,
     isUpdating: false,
+    isUserInfoModalOpen: false,
   },
   reducers: {
     onOpenRoutegramModal: (state, { payload }) => {
@@ -23,9 +24,20 @@ export const uiSlice = createSlice({
       state.isRoutegramModalOpen = true;
       state.typeRoutegramToEdit = payload;
     },
+    onOpenUserInfoModal: (state) => {
+      state.isUserInfoModalOpen = true;
+    },
+    onCloseUserInfoModal: (state) => {
+      state.isUserInfoModalOpen = false;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { onCloseRoutegramModal, onOpenRoutegramModal, onUpdating } =
-  uiSlice.actions;
+export const {
+  onCloseRoutegramModal,
+  onOpenRoutegramModal,
+  onUpdating,
+  onOpenUserInfoModal,
+  onCloseUserInfoModal,
+} = uiSlice.actions;
