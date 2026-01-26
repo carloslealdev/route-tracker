@@ -9,6 +9,7 @@ import {
 import { CenterMapOnPosition } from "../../components/CenterMapOnPosition";
 import { useState } from "react";
 import { useRoutegramStore } from "../../hooks/useRoutegramStore";
+import { Box } from "@mui/material";
 
 const DEFAULT_CENTER = [10.4806, -66.9036]; // Caracas, o una ubicación central conocida
 const INITIAL_ZOOM = 17;
@@ -19,7 +20,15 @@ export const MapScenesRoutegrams = () => {
   const { activeRouteScene } = useRoutegramStore();
 
   return (
-    <div className="map-card">
+    // <div className="map-card">
+    <Box
+      sx={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <MapContainer
         center={currentPosition}
         zoom={INITIAL_ZOOM}
@@ -58,6 +67,7 @@ export const MapScenesRoutegrams = () => {
           </Popup>
         </Marker>
       </MapContainer>
-    </div>
+    </Box>
+    // </div>
   );
 };

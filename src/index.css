@@ -73,6 +73,17 @@ button:focus-visible {
   box-sizing: border-box;
 }
 
+/* Forzando el contenedor principal a tener un alto de 100vh para evitar que el contenido se desplace */
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
 /* * {
   outline: 1px solid rgba(255, 0, 0, 0.2) !important;
 } */
@@ -128,6 +139,8 @@ button:focus-visible {
   align-items: center; */
   height: 700px;
   width: 700px;
+  /* height: 100%; */
+  /* width: 100%; */
   border-radius: 8px;
   padding: 48px;
   background-color: rgba(128, 128, 128, 0.5);

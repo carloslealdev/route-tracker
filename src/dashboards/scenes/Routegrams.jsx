@@ -31,7 +31,7 @@ export const Routegrams = () => {
   return (
     <Box
       sx={{
-        height: `calc(100vh - 165px)`,
+        height: "100%", // Fill parent
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
@@ -42,12 +42,18 @@ export const Routegrams = () => {
         subtitle="Visualización y gestión de rutagramas"
       />
 
-      <Box display="flex" flexDirection="row" gap={2}>
+      <Box
+        display="flex"
+        flexDirection="row"
+        gap={2}
+        sx={{ flex: 1, minHeight: 0 }}
+      >
         <Box
           sx={{
-            height: `calc(100vh - 165px)`, // Altura total de la ventana
+            flex: 1, // Share space, or use fixed width if desired
             display: "flex", // Habilita flexbox
             flexDirection: "column", // Organiza elementos verticalmente
+            minHeight: 0, // Allow scrolling
           }}
         >
           <List
@@ -144,9 +150,11 @@ export const Routegrams = () => {
           sx={{
             width: "70%",
             flexGrow: 1,
-            overflow: "auto",
+            // overflow: "auto", // Map usually handles its own zoom/pan, but keep if needed
             p: 2,
             backgroundColor: "gray",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <MapScenesRoutegrams />
