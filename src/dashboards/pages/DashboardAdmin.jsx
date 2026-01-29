@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import { NavBar } from "../components/NavBar";
 import { SideBar } from "../components/SideBar";
 import { styled } from "@mui/material/styles";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Routegrams } from "../scenes/Routegrams";
 import { Employees } from "../scenes/Employees";
 import { Vehicles } from "../scenes/Vehicles";
@@ -74,6 +74,7 @@ export const DashboardAdmin = () => {
               <Route path="vehiculos" element={<Vehicles />} />
               <Route path="configuracion" element={<Settings />} />
               <Route path="ayuda" element={<Help />} />
+              <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
           </Box>
         </Box>
