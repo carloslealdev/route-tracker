@@ -5,11 +5,15 @@ import {
   onClearErrorMessage,
   onLogin,
   onLogout,
+  onSetIsSubmitted,
+  onSetIsSubmitting,
 } from "../store/auth/authSlice";
 import Swal from "sweetalert2";
 
 export const useAuthStore = () => {
-  const { status, user, errorMessage } = useSelector((state) => state.auth);
+  const { status, user, errorMessage, isSubmitting } = useSelector(
+    (state) => state.auth,
+  );
   const dispatch = useDispatch();
 
   const startLogin = async ({ identityCard, password }) => {
@@ -55,6 +59,7 @@ export const useAuthStore = () => {
     address,
     role,
   }) => {
+    dispatch(onSetIsSubmitting());
     try {
       const { data } = await routeTrackerApi.post("/auth/new", {
         firstName,
@@ -72,11 +77,13 @@ export const useAuthStore = () => {
         "Usuario registrado exitosamente",
         "success",
       );
+      dispatch(onSetIsSubmitted());
     } catch (error) {
       // dispatch(onLogout(error.response.data.msg || ""));
       Swal.fire("Error en registro", "Error al registrar usuario", "error");
       setTimeout(() => {
         dispatch(onClearErrorMessage());
+        dispatch(onSetIsSubmitted());
       }, 10);
     }
   };
@@ -123,6 +130,7 @@ export const useAuthStore = () => {
     user,
     status,
     errorMessage,
+    isSubmitting,
 
     //*MÉTODOS
     startLogin,

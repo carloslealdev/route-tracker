@@ -17,17 +17,6 @@ const customStyles = {
 };
 Modal.setAppElement("#root");
 
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  identityCard: "",
-  password: "",
-  phone: "",
-  address: "",
-  role: "",
-};
-
 const roles = [
   { id: "Admin", name: "Administrador" },
   { id: "Worker", name: "Trabajador" },
@@ -39,9 +28,9 @@ const phoneRegExp =
 const userSchema = Yup.object({
   firstName: Yup.string().required("Nombre es requerido"),
   lastName: Yup.string().required("Apellido es requerido"),
-  password: Yup.string()
-    .min(6, "La contraseña debe tener al menos 6 caracteres")
-    .required("Contraseña es requerida"),
+  // password: Yup.string()
+  //   .min(6, "La contraseña debe tener al menos 6 caracteres")
+  //   .required("Contraseña es requerida"),
   identityCard: Yup.string().required("Cédula es requerida"),
   phone: Yup.string()
     .matches(phoneRegExp, "Telefono no es valido")
@@ -59,6 +48,7 @@ export const FormEditUserInfoModal = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (values) => {
+    console.log(values);
     startUpdatingUser(activeUser?._id, values);
     closeUserInfoModal();
   };
@@ -80,7 +70,7 @@ export const FormEditUserInfoModal = () => {
           lastName: activeUser?.lastName,
           email: activeUser?.email,
           identityCard: activeUser?.identityCard,
-          password: activeUser?.password,
+          //   password: activeUser?.password,
           phone: activeUser?.phone,
           address: activeUser?.address,
           role: activeUser?.role,
@@ -215,7 +205,7 @@ export const FormEditUserInfoModal = () => {
                 ))}
               </TextField>
 
-              <TextField
+              {/* <TextField
                 variant="filled"
                 type="password"
                 label="Contraseña"
@@ -228,7 +218,7 @@ export const FormEditUserInfoModal = () => {
                 sx={{
                   gridColumn: "span 2",
                 }}
-              />
+              /> */}
             </Box>
 
             <Box

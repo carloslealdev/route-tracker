@@ -32,9 +32,17 @@ export const adminSlice = createSlice({
     },
 
     onUpdateUser: (state, { payload }) => {
-      state.users = state.users.map((user) =>
-        user?._id === payload?._id ? payload : user,
-      );
+      // state.users = state.users.map((user) =>
+      //   user?._id === payload?._id ? payload : user,
+      // );
+      state.users = state.users.map((user) => {
+        if (user?._id === payload?._id) {
+          // Retornamos el usuario existente sobreescrito con los nuevos datos del payload.
+          // Esto asegura que si payload no trae 'routegrams', se mantengan los viejos (opcional, depende de tu logica)
+          return { ...user, ...payload };
+        }
+        return user;
+      });
       state.isLoading = false;
     },
   },

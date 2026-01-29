@@ -47,9 +47,12 @@ export const useAdminStore = () => {
 
     try {
       const { data } = await routeTrackerApi.delete(`/users/${id}`);
-      dispatch(onDeleteUser(data.user));
+      dispatch(onDeleteUser(id));
+
+      Swal.fire("Eliminado", "Usuario eliminado correctamente", "success");
     } catch (error) {
       console.log("Error al eliminar usuario", error);
+      Swal.fire("Error", "Error al eliminar usuario", "error");
     }
   };
 
@@ -59,8 +62,11 @@ export const useAdminStore = () => {
     try {
       const { data } = await routeTrackerApi.put(`/users/${id}`, user);
       dispatch(onUpdateUser(data.user));
+
+      Swal.fire("Actualizado", "Usuario actualizado correctamente", "success");
     } catch (error) {
       console.log("Error al actualizar usuario", error);
+      Swal.fire("Error", "Error al actualizar usuario", "error");
     }
   };
 

@@ -10,6 +10,7 @@ import { CenterMapOnPosition } from "../../components/CenterMapOnPosition";
 import { useState } from "react";
 import { useRoutegramStore } from "../../hooks/useRoutegramStore";
 import { Box } from "@mui/material";
+import { FlyToRoute } from "./FlyToRoute";
 
 const DEFAULT_CENTER = [10.4806, -66.9036]; // Caracas, o una ubicación central conocida
 const INITIAL_ZOOM = 17;
@@ -40,8 +41,10 @@ export const MapScenesRoutegrams = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
+        <FlyToRoute route={activeRouteScene} />
+
         {/* Centrar mapa en la ubicacion actual */}
-        <CenterMapOnPosition setCurrentPosition={setCurrentPosition} />
+        {/* <CenterMapOnPosition setCurrentPosition={setCurrentPosition} /> */}
 
         {/* {activeRouteScene && ( */}
         {activeRouteScene && (
@@ -50,6 +53,7 @@ export const MapScenesRoutegrams = () => {
             data={activeRouteScene.location}
             style={{ color: "blue", weight: 5 }}
           />
+
           // <Polyline
           //   positions={activeRouteScene.location.coordinates.map((coord) => [
           //     coord[1],

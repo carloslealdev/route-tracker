@@ -12,9 +12,42 @@ import { FormEditUserInfoModal } from "../components/FormEditUserInfoModal";
 import { useUiStore } from "../../hooks/useUiStore";
 
 export const Employees = () => {
+  const [isFirstLoading, setIsFirstLoading] = useState(true);
+
+  const {
+    startLoadingUsers,
+    users,
+    isLoading,
+    setActiveUser,
+    startDeletingUser,
+  } = useAdminStore();
+
+  const { openUserInfoModal } = useUiStore();
+
+  const handleEditUser = (user) => {
+    setActiveUser(user);
+    openUserInfoModal();
+  };
+
+  const handleDeleteUser = (id) => {
+    Swal.fire({
+      title: "¿Estás seguro de eliminar este usuario?",
+      text: "Esta acción no se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        startDeletingUser(id);
+      }
+    });
+  };
+
   const columns = [
     {
-      field: "identityCard",
+      field: "_id",
       headerName: "ID",
       flex: 1,
     },
@@ -118,46 +151,17 @@ export const Employees = () => {
     },
   ];
 
-  const {
-    startLoadingUsers,
-    users,
-    isLoading,
-    setActiveUser,
-    startDeletingUser,
-  } = useAdminStore();
-
-  const { openUserInfoModal } = useUiStore();
-
   useEffect(() => {
-    startLoadingUsers();
+    startLoadingUsers().then(() => {
+      setIsFirstLoading(false);
+    });
   }, []);
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isFirstLoading) return <h1>Loading...</h1>;
 
-  const handleSetActiveUser = (user) => {
-    setActiveUser(user);
-  };
-
-  const handleEditUser = (user) => {
-    setActiveUser(user);
-    openUserInfoModal();
-  };
-
-  const handleDeleteUser = (id) => {
-    Swal.fire({
-      title: "¿Estás seguro de eliminar este usuario?",
-      text: "Esta acción no se puede deshacer",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Sí, eliminar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        startDeletingUser(id);
-      }
-    });
-  };
+  // const handleSetActiveUser = (user) => {
+  //   setActiveUser(user);
+  // };
 
   return (
     <Box>
@@ -171,7 +175,7 @@ export const Employees = () => {
           className="dataGrid-adminDashboard"
           rows={users}
           columns={columns}
-          getRowId={(row) => row.identityCard}
+          getRowId={(row) => row._id}
         />
       </Box>
 

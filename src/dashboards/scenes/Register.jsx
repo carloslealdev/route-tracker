@@ -41,7 +41,7 @@ const userSchema = Yup.object({
 });
 
 export const Register = () => {
-  const { startRegister } = useAuthStore();
+  const { startRegister, isSubmitting } = useAuthStore();
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const handleFormSubmit = (values, { resetForm }) => {
     console.log(values);
@@ -214,7 +214,7 @@ export const Register = () => {
             <Box
               sx={{ mt: "20px", display: "flex", justifyContent: "flex-end" }}
             >
-              <Button type="submit" variant="contained">
+              <Button type="submit" variant="contained" disabled={isSubmitting}>
                 Crear Usuario
               </Button>
             </Box>

@@ -8,6 +8,7 @@ export const authSlice = createSlice({
     status: "checking",
     user: {},
     errorMessage: undefined,
+    isSubmitting: false,
   },
   reducers: {
     onChecking: (state, { payload }) => {
@@ -31,9 +32,23 @@ export const authSlice = createSlice({
     onClearErrorMessage: (state, { payload }) => {
       state.errorMessage = undefined;
     },
+
+    onSetIsSubmitting: (state) => {
+      state.isSubmitting = true;
+    },
+
+    onSetIsSubmitted: (state) => {
+      state.isSubmitting = false;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { onChecking, onClearErrorMessage, onLogin, onLogout } =
-  authSlice.actions;
+export const {
+  onChecking,
+  onClearErrorMessage,
+  onLogin,
+  onLogout,
+  onSetIsSubmitting,
+  onSetIsSubmitted,
+} = authSlice.actions;
