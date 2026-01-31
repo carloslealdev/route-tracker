@@ -11,6 +11,7 @@ import { HandleClick } from "../../components/HandleClick";
 import { useState } from "react";
 import { useRoutegramStore } from "../../hooks/useRoutegramStore";
 import { useUiStore } from "../../hooks/useUiStore";
+import { FlyToRoute } from "./FlyToRoute";
 
 const DEFAULT_CENTER = [10.4806, -66.9036]; // Caracas, o una ubicación central conocida
 const INITIAL_ZOOM = 17;
@@ -41,16 +42,19 @@ export const Map = () => {
         <HandleClick draftPoints={draftPoints} />
 
         {/* Centrar mapa en la ubicacion actual */}
-        <CenterMapOnPosition setCurrentPosition={setCurrentPosition} />
+        {/* <CenterMapOnPosition setCurrentPosition={setCurrentPosition} /> */}
         {draftPoints.length > 0 && (
           <Polyline positions={draftPoints} color="red" />
         )}
 
         {isUpdating && (
-          <GeoJSON
-            data={activeRoute.location}
-            style={{ color: "blue", weight: 5 }}
-          />
+          <>
+            <FlyToRoute route={activeRoute} />
+            <GeoJSON
+              data={activeRoute.location}
+              style={{ color: "blue", weight: 5 }}
+            />
+          </>
         )}
 
         <Marker position={currentPosition}>

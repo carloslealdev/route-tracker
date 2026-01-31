@@ -36,7 +36,7 @@ export const MapTrabajoCasa = () => {
   const handleUpdate = () => {
     setActiveRoutegram(typeRoutegram);
 
-    startUpdatingRoutegram();
+    startUpdatingRoutegram(typeRoutegram);
   };
   const handleDelete = () => {
     Swal.fire({

@@ -18,15 +18,25 @@ export const CenterMapTrabajoCasa = ({ setInitialPointTrabajoCasa }) => {
         routeTrabajoCasa.location &&
         routeTrabajoCasa.location.coordinates.length > 0
       ) {
-        const firstPoint = [
-          routeTrabajoCasa.location.coordinates[0][1],
-          routeTrabajoCasa.location.coordinates[0][0],
-        ];
+        // const firstPoint = [
+        //   routeTrabajoCasa.location.coordinates[0][1],
+        //   routeTrabajoCasa.location.coordinates[0][0],
+        // ];
 
-        map.flyTo(firstPoint, 15, {
-          duration: 1,
-        });
-        setInitialPointTrabajoCasa(firstPoint);
+        // map.flyTo(firstPoint, 15, {
+        //   duration: 1.5,
+        // });
+        // setInitialPointTrabajoCasa(firstPoint);
+
+        const layer = L.geoJSON(routeTrabajoCasa.location);
+        const bounds = layer.getBounds();
+
+        if (bounds.isValid()) {
+          map.flyToBounds(bounds, {
+            padding: [50, 50],
+            duration: 1.5,
+          });
+        }
       }
     }
   }, [loadedRoutes, map, setInitialPointTrabajoCasa]);
