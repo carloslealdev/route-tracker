@@ -64,7 +64,7 @@ export const SideBarListOptions = ({ open }) => {
               <SettingsIcon />
             </ListItemIcon>
             <ListItemText
-              primary="Configuración"
+              primary="Configuración y Ayuda"
               sx={[
                 open
                   ? {
@@ -77,7 +77,7 @@ export const SideBarListOptions = ({ open }) => {
             />
           </ListItemButton>
         </ListItem>
-
+        {/* 
         <ListItem disablePadding sx={{ display: "block" }}>
           <ListItemButton
             onClick={() => handleNavigate("/ayuda")}
@@ -126,7 +126,7 @@ export const SideBarListOptions = ({ open }) => {
               ]}
             />
           </ListItemButton>
-        </ListItem>
+        </ListItem> */}
 
         <ListItem disablePadding sx={{ display: "block" }}>
           <ListItemButton

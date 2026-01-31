@@ -12,6 +12,9 @@ import { useState } from "react";
 import { useRoutegramStore } from "../../hooks/useRoutegramStore";
 import { useUiStore } from "../../hooks/useUiStore";
 import { FlyToRoute } from "./FlyToRoute";
+//INICIANDO IMPORTACIONES DE TEST DE INTEGRACION CON ROUTING MACHINE
+
+//TERMINANDO IMPORTACIONES DE TEST DE INTEGRACION CON ROUTING MACHINE
 
 const DEFAULT_CENTER = [10.4806, -66.9036]; // Caracas, o una ubicación central conocida
 const INITIAL_ZOOM = 17;
@@ -21,6 +24,10 @@ export const Map = () => {
 
   const { draftPoints, activeRoute } = useRoutegramStore();
   const { typeRoutegramToEdit, isUpdating } = useUiStore();
+
+  //INICIANDO TEST DE INTEGRACION CON ROUTING MACHINE
+
+  //TERMINANDO TEST DE INTEGRACION CON ROUTING MACHINE
   return (
     <div className="map-card">
       <h1>Nuevo Rutagrama {typeRoutegramToEdit}</h1>
@@ -37,23 +44,24 @@ export const Map = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {/* Logica para capturar clicks */}
-        {/* <HandleClick route={route} setRoute={setRoute} /> */}
-        <HandleClick draftPoints={draftPoints} />
-
-        {/* Centrar mapa en la ubicacion actual */}
-        {/* <CenterMapOnPosition setCurrentPosition={setCurrentPosition} /> */}
-        {draftPoints.length > 0 && (
-          <Polyline positions={draftPoints} color="red" />
-        )}
-
-        {isUpdating && (
+        {isUpdating ? (
           <>
+            {/* Logica para capturar clicks */}
+            <HandleClick draftPoints={draftPoints} />
+
+            {draftPoints.length > 0 && (
+              <Polyline positions={draftPoints} color="red" />
+            )}
             <FlyToRoute route={activeRoute} />
             <GeoJSON
               data={activeRoute.location}
               style={{ color: "blue", weight: 5 }}
             />
+          </>
+        ) : (
+          <>
+            {/* Centrar mapa en la ubicacion actual */}
+            <CenterMapOnPosition setCurrentPosition={setCurrentPosition} />
           </>
         )}
 

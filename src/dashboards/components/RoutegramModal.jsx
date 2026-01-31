@@ -3,6 +3,7 @@ import { useUiStore } from "../../hooks/useUiStore";
 import { Map } from "./Map";
 import { ActionsBar } from "./ActionsBar";
 import { useRoutegramStore } from "../../hooks/useRoutegramStore";
+import { MapTestRoutingMachine } from "./MapTestRoutingMachine";
 
 const customStyles = {
   content: {
@@ -39,6 +40,9 @@ export const RoutegramModal = () => {
       <h2 style={{ color: "black" }}>{typeRoutegramToEdit}</h2>
       <Map />
       <ActionsBar />
+
+      {/* TEST DE INTEGRACION CON ROUTING MACHINE */}
+      {/* <MapTestRoutingMachine /> */}
     </Modal>
   );
 };

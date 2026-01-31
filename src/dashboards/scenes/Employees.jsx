@@ -54,27 +54,32 @@ export const Employees = () => {
     {
       field: "firstName",
       headerName: "Nombre",
-      flex: 1,
+      // flex: 1,
     },
     {
       field: "lastName",
       headerName: "Apellido",
-      flex: 1,
+      // flex: 1,
+    },
+    {
+      field: "identityCard",
+      headerName: "Cédula",
+      // flex: 1,
     },
     {
       field: "phone",
       headerName: "Telefono",
-      flex: 1,
+      // flex: 1,
     },
     {
       field: "email",
       headerName: "Email",
-      flex: 1,
+      // flex: 1,
     },
     {
       field: "address",
       headerName: "Direccion",
-      flex: 1,
+      // flex: 1,
     },
     {
       field: "routegrams",
@@ -112,7 +117,7 @@ export const Employees = () => {
       renderCell: ({ row: { role } }) => {
         return (
           <Box
-            width="100%"
+            width="70%"
             m="8px auto"
             p="5px"
             display="flex"
@@ -134,7 +139,7 @@ export const Employees = () => {
       align: "center",
       renderCell: ({ row }) => {
         return (
-          <Box display="flex" gap={2} m="8px">
+          <Box display="flex" justifyContent="center" gap={2} m="8px">
             <Button variant="contained" onClick={() => handleEditUser(row)}>
               Editar
             </Button>

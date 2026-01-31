@@ -9,7 +9,7 @@ import { useAuthStore } from "../../hooks/useAuthStore";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useRoutegramStore } from "../../hooks/useRoutegramStore";
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",

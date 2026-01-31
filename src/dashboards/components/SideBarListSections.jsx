@@ -223,7 +223,7 @@ export const SideBarListSections = ({ open }) => {
           </ListItemButton>
         </ListItem>
 
-        <ListItem disablePadding sx={{ display: "block" }}>
+        {/* <ListItem disablePadding sx={{ display: "block" }}>
           <ListItemButton
             onClick={() => handleNavigate("/vehiculos")}
             sx={[
@@ -271,7 +271,7 @@ export const SideBarListSections = ({ open }) => {
               ]}
             />
           </ListItemButton>
-        </ListItem>
+        </ListItem> */}
       </List>
     </>
   );
