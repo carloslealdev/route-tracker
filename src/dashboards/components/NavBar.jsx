@@ -56,7 +56,8 @@ export const NavBar = ({ open, setOpen }) => {
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
-            disabled={user.role === "Worker"}
+            // display={user.role === "Worker" ? "none" : "flex"}
+            // disabled={user.role === "Worker"}
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -66,6 +67,7 @@ export const NavBar = ({ open, setOpen }) => {
                 marginRight: 5,
               },
               open && { display: "none" },
+              user.role === "Worker" && { display: "none" },
             ]}
           >
             <MenuIcon />
@@ -88,7 +90,7 @@ export const NavBar = ({ open, setOpen }) => {
               <Typography variant="h6" noWrap component="div">
                 Route Tracker App
               </Typography>
-
+              {/* 
               <TextField
                 // label="Buscar por Nombre o Cédula"
                 variant="standard"
@@ -110,7 +112,7 @@ export const NavBar = ({ open, setOpen }) => {
                     },
                   },
                 }}
-              />
+              /> */}
             </Box>
 
             <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>

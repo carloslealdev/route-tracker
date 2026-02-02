@@ -13,6 +13,7 @@ import { CenterMapCasaTrabajo } from "../../components/CenterMapCasaTrabajo";
 import { NoRoutegramAvailable } from "./NoRoutegramAvailable";
 import { useUiStore } from "../../hooks/useUiStore";
 import Swal from "sweetalert2";
+import { Box, Button, Typography } from "@mui/material";
 
 const DEFAULT_CENTER = [10.4806, -66.9036]; // Caracas, o una ubicación central conocida
 const INITIAL_ZOOM = 17;
@@ -58,9 +59,78 @@ export const MapCasaTrabajo = () => {
   return (
     <>
       {/* MAPA CASA - TRABAJO */}
-      <div className="map-card">
-        <h1>Ruta {typeRoutegram}</h1>
-        <span>Ultima fecha de actualizacion: {new Date().toISOString()}</span>
+      <Box
+        className="map-card"
+        sx={{
+          background: "rgba(255, 255, 255, 0.1)",
+          backdropFilter: "blur(5px)",
+          borderRadius: "20px",
+          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.5)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px",
+          height: "700px",
+          width: "700px",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Box>
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: "bold",
+                color: "white",
+              }}
+            >
+              Ruta {typeRoutegram}
+            </Typography>
+            <Box sx={{ display: "flex", gap: "8px", alignItems: "center" }}>
+              <Typography
+                variant="body1"
+                sx={{ color: "white", fontWeight: "bold" }}
+              >
+                DISTANCIA TOTAL:
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: "#1976d2",
+                  fontWeight: "bold",
+                  // textAlign: "left",
+                  fontSize: "24px",
+                }}
+              >
+                {(routeCasaTrabajo?.distance / 1000).toFixed(2)} km
+              </Typography>
+            </Box>
+          </Box>
+          <Box>
+            <Typography
+              variant="body1"
+              sx={{ color: "white", fontWeight: "bold" }}
+            >
+              TIEMPO DE VIAJE:
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                color: "#1976d2",
+                fontWeight: "bold",
+                textAlign: "right",
+                fontSize: "32px",
+              }}
+            >
+              {(routeCasaTrabajo?.travelTime / 60).toFixed(2)} min
+            </Typography>
+          </Box>
+        </Box>
+        {/* <span>Ultima fecha de actualizacion: {new Date().toISOString()}</span> */}
         {routeCasaTrabajo ? (
           <div className="map-container">
             <MapContainer
@@ -96,14 +166,18 @@ export const MapCasaTrabajo = () => {
               </Marker>
             </MapContainer>
             <div className="actions-map-buttons-container">
-              <button onClick={handleDelete}>Delete</button>
-              <button onClick={handleUpdate}>Update</button>
+              <Button variant="contained" color="error" onClick={handleDelete}>
+                Eliminar
+              </Button>
+              <Button variant="contained" onClick={handleUpdate}>
+                Actualizar
+              </Button>
             </div>
           </div>
         ) : (
           <NoRoutegramAvailable typeRoutegram={typeRoutegram} />
         )}
-      </div>
+      </Box>
     </>
   );
 };

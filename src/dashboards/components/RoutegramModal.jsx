@@ -38,11 +38,11 @@ export const RoutegramModal = () => {
       //   className="modal"
     >
       <h2 style={{ color: "black" }}>{typeRoutegramToEdit}</h2>
-      <Map />
-      <ActionsBar />
+      {/* <Map />
+      <ActionsBar /> */}
 
       {/* TEST DE INTEGRACION CON ROUTING MACHINE */}
-      {/* <MapTestRoutingMachine /> */}
+      <MapTestRoutingMachine />
     </Modal>
   );
 };

@@ -17,7 +17,7 @@ const drawerWidth = 240;
 
 //todo DrawerHeader Es necesario para que el contenido se muestre debajo de la barra de navegación
 //todo: Deberia ser un componente reutilizable
-const DrawerHeader = styled("div")(({ theme }) => ({
+export const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",

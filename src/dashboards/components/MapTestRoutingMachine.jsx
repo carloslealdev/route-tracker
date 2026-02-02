@@ -1,7 +1,16 @@
 import { useState } from "react";
-import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMapEvents,
+} from "react-leaflet";
 import { RoutingMachine } from "./RoutingMachine"; // El archivo que creamos arriba
 import { Button, Box, Typography } from "@mui/material";
+import { useRoutegramStore } from "../../hooks/useRoutegramStore";
+import { useUiStore } from "../../hooks/useUiStore";
+import { GeoJSON } from "react-leaflet";
 
 // Helper para capturar clicks en el mapa
 const MapClicker = ({ onMapClick }) => {
@@ -12,6 +21,10 @@ const MapClicker = ({ onMapClick }) => {
 };
 
 export const MapTestRoutingMachine = () => {
+  const { activeRoute, startSavingRoutegram, startUpdatingRoutegram } =
+    useRoutegramStore();
+  const { typeRoutegramToEdit, closeRoutegramModal, isUpdating } = useUiStore();
+
   // Estado para los puntos A y B
   const [points, setPoints] = useState({ start: null, end: null });
 
@@ -32,20 +45,37 @@ export const MapTestRoutingMachine = () => {
 
   const handleSaveRoute = () => {
     if (!routeResult) return;
+    //todo: Implementar el tiempo de ruta
+    //todo: Implementar el tiempo de llegada estimado
 
     // AQUÍ CONSTRUYES TU OBJETO PARA EL BACKEND
-    const newRoutegram = {
-      location: {
-        type: "LineString",
-        coordinates: routeResult.coordinates, // Ya viene en formato [Lng, Lat]
-      },
-      distance: routeResult,
-      //   distance: routeResult.summary.totalDistance, // en metros
-      // ... otros campos (nombre, usuario, etc)
+    // const newRoutegram = {
+    //   location: {
+    //     type: "LineString",
+    //     coordinates: routeResult.coordinates, // Ya viene en formato [Lng, Lat]
+    //   },
+    //   distance: routeResult,
+    //   //   distance: routeResult.summary.totalDistance, // en metros
+    //   // ... otros campos (nombre, usuario, etc)
+    // };
+    const dataToSave = {
+      type: "LineString",
+      typeRoute: typeRoutegramToEdit,
+      coordinates: routeResult.coordinates,
+      distance: routeResult.summary.totalDistance,
+      travelTime: routeResult.summary.totalTime,
     };
 
-    console.log("Enviando a Mongo:", newRoutegram);
+    if (activeRoute && activeRoute._id) {
+      startUpdatingRoutegram(activeRoute._id, dataToSave);
+    } else {
+      startSavingRoutegram(dataToSave);
+    }
+
+    // console.log("Enviando a Mongo:", newRoutegram);
+    console.log("Enviando a Mongo:", dataToSave);
     // dispatch( startCreatingRoutegram(newRoutegram) );
+    closeRoutegramModal();
   };
 
   const resetMap = () => {
@@ -54,7 +84,13 @@ export const MapTestRoutingMachine = () => {
   };
 
   return (
-    <Box height="80vh" display="flex" flexDirection="column" gap={2}>
+    <Box
+      height="80vh"
+      width="80vw"
+      display="flex"
+      flexDirection="column"
+      gap={2}
+    >
       {/* Panel de Instrucciones / Control */}
       <Box
         display="flex"
@@ -99,6 +135,9 @@ export const MapTestRoutingMachine = () => {
             endPoint={points.end}
             setRouteInfo={setRouteResult}
           />
+        )}
+        {isUpdating && (
+          <GeoJSON data={activeRoute.location} style={{ color: "blue" }} />
         )}
       </MapContainer>
     </Box>
