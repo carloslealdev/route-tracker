@@ -99,6 +99,18 @@ export const Register = () => {
                 helperText={touched.firstName && errors.firstName}
                 sx={{
                   gridColumn: "span 2",
+                  input: {
+                    color: "white",
+                  },
+                  label: {
+                    color: "white",
+                  },
+                  "& .MuiFilledInput-root::before": {
+                    borderColor: "#ffffff83",
+                  },
+                  "& .MuiFilledInput-root::after": {
+                    borderColor: "#d32f2f",
+                  },
                 }}
               />
               <TextField
@@ -113,6 +125,18 @@ export const Register = () => {
                 helperText={touched.lastName && errors.lastName}
                 sx={{
                   gridColumn: "span 2",
+                  input: {
+                    color: "white",
+                  },
+                  label: {
+                    color: "white",
+                  },
+                  "& .MuiFilledInput-root::before": {
+                    borderColor: "#ffffff83",
+                  },
+                  "& .MuiFilledInput-root::after": {
+                    borderColor: "#d32f2f",
+                  },
                 }}
               />
               <TextField
@@ -127,6 +151,18 @@ export const Register = () => {
                 helperText={touched.identityCard && errors.identityCard}
                 sx={{
                   gridColumn: "span 2",
+                  input: {
+                    color: "white",
+                  },
+                  label: {
+                    color: "white",
+                  },
+                  "& .MuiFilledInput-root::before": {
+                    borderColor: "#ffffff83",
+                  },
+                  "& .MuiFilledInput-root::after": {
+                    borderColor: "#d32f2f",
+                  },
                 }}
               />
               <TextField
@@ -141,6 +177,18 @@ export const Register = () => {
                 helperText={touched.email && errors.email}
                 sx={{
                   gridColumn: "span 2",
+                  input: {
+                    color: "white",
+                  },
+                  label: {
+                    color: "white",
+                  },
+                  "& .MuiFilledInput-root::before": {
+                    borderColor: "#ffffff83",
+                  },
+                  "& .MuiFilledInput-root::after": {
+                    borderColor: "#d32f2f",
+                  },
                 }}
               />
               <TextField
@@ -155,6 +203,18 @@ export const Register = () => {
                 helperText={touched.phone && errors.phone}
                 sx={{
                   gridColumn: "span 2",
+                  input: {
+                    color: "white",
+                  },
+                  label: {
+                    color: "white",
+                  },
+                  "& .MuiFilledInput-root::before": {
+                    borderColor: "#ffffff83",
+                  },
+                  "& .MuiFilledInput-root::after": {
+                    borderColor: "#d32f2f",
+                  },
                 }}
               />
               <TextField
@@ -169,6 +229,18 @@ export const Register = () => {
                 helperText={touched.address && errors.address}
                 sx={{
                   gridColumn: "span 2",
+                  input: {
+                    color: "white",
+                  },
+                  label: {
+                    color: "white",
+                  },
+                  "& .MuiFilledInput-root::before": {
+                    borderColor: "#ffffff83",
+                  },
+                  "& .MuiFilledInput-root::after": {
+                    borderColor: "#d32f2f",
+                  },
                 }}
               />
 
@@ -186,6 +258,18 @@ export const Register = () => {
                 defaultValue={""}
                 sx={{
                   gridColumn: "span 2",
+                  input: {
+                    color: "white",
+                  },
+                  label: {
+                    color: "white",
+                  },
+                  "& .MuiFilledInput-root::before": {
+                    borderColor: "#ffffff83",
+                  },
+                  "& .MuiFilledInput-root::after": {
+                    borderColor: "#d32f2f",
+                  },
                 }}
               >
                 {roles.map((role) => (
@@ -207,6 +291,18 @@ export const Register = () => {
                 helperText={touched.password && errors.password}
                 sx={{
                   gridColumn: "span 2",
+                  input: {
+                    color: "white",
+                  },
+                  label: {
+                    color: "white",
+                  },
+                  "& .MuiFilledInput-root::before": {
+                    borderColor: "#ffffff83",
+                  },
+                  "& .MuiFilledInput-root::after": {
+                    borderColor: "#d32f2f",
+                  },
                 }}
               />
             </Box>

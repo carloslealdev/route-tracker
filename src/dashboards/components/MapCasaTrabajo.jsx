@@ -106,7 +106,9 @@ export const MapCasaTrabajo = () => {
                   fontSize: "24px",
                 }}
               >
-                {(routeCasaTrabajo?.distance / 1000).toFixed(2)} km
+                {!routeCasaTrabajo?.distance
+                  ? "Sin datos"
+                  : (routeCasaTrabajo?.distance / 1000).toFixed(2) + " km"}
               </Typography>
             </Box>
           </Box>
@@ -126,7 +128,9 @@ export const MapCasaTrabajo = () => {
                 fontSize: "32px",
               }}
             >
-              {(routeCasaTrabajo?.travelTime / 60).toFixed(2)} min
+              {!routeCasaTrabajo?.travelTime
+                ? "Sin datos"
+                : (routeCasaTrabajo?.travelTime / 60).toFixed(2) + " min"}
             </Typography>
           </Box>
         </Box>

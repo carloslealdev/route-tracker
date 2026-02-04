@@ -49,7 +49,7 @@ export const Employees = () => {
     {
       field: "_id",
       headerName: "ID",
-      flex: 1,
+      // flex: 1,
     },
     {
       field: "firstName",

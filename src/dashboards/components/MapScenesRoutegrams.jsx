@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useRoutegramStore } from "../../hooks/useRoutegramStore";
 import { Box } from "@mui/material";
 import { FlyToRoute } from "./FlyToRoute";
+import { InfoMapOverlay } from "./InfoMapOverlay";
 
 const DEFAULT_CENTER = [10.4806, -66.9036]; // Caracas, o una ubicación central conocida
 const INITIAL_ZOOM = 17;
@@ -36,6 +37,7 @@ export const MapScenesRoutegrams = () => {
         scrollWheelZoom={true}
         style={{ flex: 1, width: "100%" }}
       >
+        <InfoMapOverlay />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -20,7 +20,7 @@ const MapClicker = ({ onMapClick }) => {
   return null;
 };
 
-export const MapTestRoutingMachine = () => {
+export const MapRoutingMachine = () => {
   const { activeRoute, startSavingRoutegram, startUpdatingRoutegram } =
     useRoutegramStore();
   const { typeRoutegramToEdit, closeRoutegramModal, isUpdating } = useUiStore();

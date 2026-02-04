@@ -73,6 +73,12 @@ export const LoginPage = () => {
             <TextField
               sx={{
                 width: "100%",
+                input: {
+                  color: "white",
+                },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#ffffff83",
+                },
               }}
               type="text"
               placeholder="Cédula"
@@ -84,6 +90,12 @@ export const LoginPage = () => {
               sx={{
                 width: "100%",
                 mt: 2,
+                input: {
+                  color: "white",
+                },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#ffffff83",
+                },
               }}
               type="password"
               placeholder="Contraseña"

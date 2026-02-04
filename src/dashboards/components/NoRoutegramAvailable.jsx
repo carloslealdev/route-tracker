@@ -1,5 +1,6 @@
 import React from "react";
 import { useUiStore } from "../../hooks/useUiStore";
+import { Button, Typography } from "@mui/material";
 
 export const NoRoutegramAvailable = ({ typeRoutegram }) => {
   const { openRoutegramModal } = useUiStore();
@@ -10,11 +11,13 @@ export const NoRoutegramAvailable = ({ typeRoutegram }) => {
   return (
     <>
       <div className="no-map-available-container">
-        <h2>No posee un Rutagrama de este tipo</h2>
+        <Typography variant="h6" color="error" sx={{ fontWeight: "bold" }}>
+          No posee un Rutagrama de este tipo
+        </Typography>
 
-        <button onClick={handleClick} className="btn-new-routegram">
-          New Routegram
-        </button>
+        <Button variant="contained" color="primary" onClick={handleClick}>
+          Crear Rutagrama
+        </Button>
       </div>
     </>
   );

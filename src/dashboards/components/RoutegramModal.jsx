@@ -3,7 +3,7 @@ import { useUiStore } from "../../hooks/useUiStore";
 import { Map } from "./Map";
 import { ActionsBar } from "./ActionsBar";
 import { useRoutegramStore } from "../../hooks/useRoutegramStore";
-import { MapTestRoutingMachine } from "./MapTestRoutingMachine";
+import { MapRoutingMachine } from "./MapRoutingMachine";
 
 const customStyles = {
   content: {
@@ -42,7 +42,7 @@ export const RoutegramModal = () => {
       <ActionsBar /> */}
 
       {/* TEST DE INTEGRACION CON ROUTING MACHINE */}
-      <MapTestRoutingMachine />
+      <MapRoutingMachine />
     </Modal>
   );
 };
