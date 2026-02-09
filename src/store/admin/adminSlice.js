@@ -7,6 +7,14 @@ export const adminSlice = createSlice({
     routegrams: [],
     isLoading: false,
     activeUser: null,
+    dashboardStats: {
+      totalEmployees: 0,
+      totalRoutegrams: 0,
+      longestRoute: null,
+      shortestRoute: null,
+      distanceRangeGraph: null,
+    },
+    isLoadingDashboardStats: false,
   },
   reducers: {
     onLoadUsers: (state, { payload }) => {
@@ -45,6 +53,15 @@ export const adminSlice = createSlice({
       });
       state.isLoading = false;
     },
+
+    onLoadDashboardStats: (state, { payload }) => {
+      state.dashboardStats = payload;
+      state.isLoadingDashboardStats = false;
+    },
+
+    onSetIsLoadingDashboardStats: (state, { payload }) => {
+      state.isLoadingDashboardStats = true;
+    },
   },
 });
 
@@ -56,4 +73,6 @@ export const {
   onSetActiveUser,
   onDeleteUser,
   onUpdateUser,
+  onLoadDashboardStats,
+  onSetIsLoadingDashboardStats,
 } = adminSlice.actions;

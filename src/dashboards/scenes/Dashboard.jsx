@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Header } from "../components/Header";
 import { Box, Typography } from "@mui/material";
 import { TotalEmployees } from "./indicators/TotalEmployees";
 import { TotalRoutegrams } from "./indicators/TotalRoutegrams";
 import { LongestRoutegram } from "./indicators/LongestRoutegram";
 import { ShortestRoutegram } from "./indicators/ShortestRoutegram";
+import { DistanceRangeGraph } from "./indicators/DistanceRangeGraph";
+import { useAdminStore } from "../../hooks/useAdminStore";
 
 export const Dashboard = () => {
+  const {
+    startLoadingDashboardStats,
+    dashboardStats,
+    isLoadingDashboardStats,
+  } = useAdminStore();
+
+  useEffect(() => {
+    startLoadingDashboardStats();
+  }, []);
+
+  const {
+    totalEmployees,
+    totalRoutegrams,
+    longestRoute,
+    shortestRoute,
+    distanceRangeGraph,
+  } = dashboardStats;
+
+  if (isLoadingDashboardStats) return <h1>Cargando...</h1>;
+
   return (
     <>
+      {console.log(dashboardStats)}
       <Box
         sx={{
           height: "100%", // Fill parent
@@ -36,7 +59,7 @@ export const Dashboard = () => {
           {/* CONTENEDOR IZQUIERDO */}
           <Box
             sx={{
-              width: "50%",
+              width: "100%",
               height: "100%",
               borderRadius: "8px",
               boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
@@ -59,31 +82,65 @@ export const Dashboard = () => {
                   gap: "20px",
                 }}
               >
-                {/* CONTENEDOR SUPERIOR IZQUIERDO */}
+                {/* PRIMER CONTENEDOR */}
                 <Box
                   sx={{
                     width: "50%",
                     height: "100%",
-                    border: "1px solid #ccc",
+                    border: "1px solid #616161ff",
                     borderRadius: "8px",
                     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                    backgroundColor: "#0a0b0cff",
                     padding: "20px",
                   }}
                 >
-                  <TotalEmployees />
+                  <TotalEmployees totalEmployees={totalEmployees} />
                 </Box>
-                {/* CONTENEDOR SUPERIOR DERECHO */}
+                {/* SEGUNDO CONTENEDOR */}
                 <Box
                   sx={{
                     width: "50%",
                     height: "100%",
-                    border: "1px solid #ccc",
+                    border: "1px solid #616161ff",
                     borderRadius: "8px",
                     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                    backgroundColor: "#0a0b0cff",
                     padding: "20px",
                   }}
                 >
-                  <TotalRoutegrams />
+                  <TotalRoutegrams totalRoutegrams={totalRoutegrams} />
+                </Box>
+
+                {/* TERCER CONTENEDOR */}
+                <Box
+                  sx={{
+                    width: "50%",
+                    height: "100%",
+                    border: "1px solid #616161ff",
+                    borderRadius: "8px",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                    backgroundColor: "#0a0b0cff",
+
+                    padding: "20px",
+                  }}
+                >
+                  <LongestRoutegram longestRoute={longestRoute} />
+                </Box>
+
+                {/* CUARTO CONTENEDOR */}
+                <Box
+                  sx={{
+                    width: "50%",
+                    height: "100%",
+                    border: "1px solid #616161ff",
+                    borderRadius: "8px",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                    backgroundColor: "#0a0b0cff",
+
+                    padding: "20px",
+                  }}
+                >
+                  <ShortestRoutegram shortestRoute={shortestRoute} />
                 </Box>
               </Box>
               {/* CONTENEDOR INFERIOR */}
@@ -91,78 +148,14 @@ export const Dashboard = () => {
                 sx={{
                   width: "100%",
                   height: "70%",
-                  border: "1px solid #ccc",
+                  border: "1px solid #616161ff",
                   borderRadius: "8px",
                   boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                  backgroundColor: "#0a0b0cff",
                   padding: "20px",
-                }}
-              ></Box>
-            </Box>
-          </Box>
-
-          {/* CONTENEDOR DERECHO */}
-          <Box
-            sx={{
-              width: "50%",
-              height: "100%",
-              borderRadius: "8px",
-              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "20px",
-                height: "100%",
-              }}
-            >
-              {/* CONTENEDOR SUPERIOR */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: "70%",
-                  border: "1px solid #ccc",
-                  borderRadius: "8px",
-                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                  padding: "20px",
-                }}
-              ></Box>
-              {/* CONTENEDOR INFERIOR */}
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  height: "30%",
-                  gap: "20px",
                 }}
               >
-                {/* CONTENEDOR INFERIOR IZQUIERDO */}
-                <Box
-                  sx={{
-                    width: "50%",
-                    height: "100%",
-                    border: "1px solid #ccc",
-                    borderRadius: "8px",
-                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                    padding: "20px",
-                  }}
-                >
-                  <LongestRoutegram />
-                </Box>
-                {/* CONTENEDOR INFERIOR DERECHO */}
-                <Box
-                  sx={{
-                    width: "50%",
-                    height: "100%",
-                    border: "1px solid #ccc",
-                    borderRadius: "8px",
-                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                    padding: "20px",
-                  }}
-                >
-                  <ShortestRoutegram />
-                </Box>
+                <DistanceRangeGraph distanceRangeGraph={distanceRangeGraph} />
               </Box>
             </Box>
           </Box>
