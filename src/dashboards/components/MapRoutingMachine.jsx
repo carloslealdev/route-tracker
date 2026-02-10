@@ -11,6 +11,7 @@ import { Button, Box, Typography } from "@mui/material";
 import { useRoutegramStore } from "../../hooks/useRoutegramStore";
 import { useUiStore } from "../../hooks/useUiStore";
 import { GeoJSON } from "react-leaflet";
+import { FlyToRoute } from "./FlyToRoute";
 
 // Helper para capturar clicks en el mapa
 const MapClicker = ({ onMapClick }) => {
@@ -137,7 +138,10 @@ export const MapRoutingMachine = () => {
           />
         )}
         {isUpdating && (
-          <GeoJSON data={activeRoute.location} style={{ color: "blue" }} />
+          <>
+            <GeoJSON data={activeRoute?.location} style={{ color: "blue" }} />
+            <FlyToRoute route={activeRoute} />
+          </>
         )}
       </MapContainer>
     </Box>

@@ -19,8 +19,8 @@ export const DistanceRangeGraph = ({ distanceRangeGraph }) => {
     <Paper
       elevation={3}
       sx={{
-        // p: 3,
-        height: "400px",
+        height: "100%",
+        width: "100%",
         display: "flex",
         flexDirection: "column",
         backgroundColor: "#0a0b0cff",
@@ -39,7 +39,7 @@ export const DistanceRangeGraph = ({ distanceRangeGraph }) => {
         Cantidad de empleados según la distancia que recorren.
       </Typography>
 
-      <Box flex={1} minHeight={0}>
+      <Box sx={{ flex: 1, minHeight: 0, width: "100%" }}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={distanceRangeGraph}

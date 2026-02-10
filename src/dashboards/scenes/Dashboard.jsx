@@ -31,7 +31,6 @@ export const Dashboard = () => {
 
   return (
     <>
-      {console.log(dashboardStats)}
       <Box
         sx={{
           height: "100%", // Fill parent

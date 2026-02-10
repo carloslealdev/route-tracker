@@ -181,6 +181,12 @@ export const Employees = () => {
           rows={users}
           columns={columns}
           getRowId={(row) => row._id}
+          initialState={{
+            pagination: {
+              paginationModel: { pageSize: 25 }, // Establece 25 filas por defecto
+            },
+          }}
+          pageSizeOptions={[5, 10, 25, 100]} // Opciones en el menú
         />
       </Box>
 
