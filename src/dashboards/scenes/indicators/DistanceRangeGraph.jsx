@@ -59,7 +59,7 @@ export const DistanceRangeGraph = ({ distanceRangeGraph }) => {
             />
             {/* Barra verde corporativa */}
             <Bar
-              dataKey="employees"
+              dataKey="trabajadores"
               fill="#008307"
               radius={[5, 5, 0, 0]}
               barSize={50}

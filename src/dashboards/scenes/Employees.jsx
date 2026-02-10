@@ -10,6 +10,7 @@ import { useAdminStore } from "../../hooks/useAdminStore";
 import Swal from "sweetalert2";
 import { FormEditUserInfoModal } from "../components/FormEditUserInfoModal";
 import { useUiStore } from "../../hooks/useUiStore";
+import { LoadingComponent } from "../components/LoadingComponent";
 
 export const Employees = () => {
   const [isFirstLoading, setIsFirstLoading] = useState(true);
@@ -162,7 +163,7 @@ export const Employees = () => {
     });
   }, []);
 
-  if (isFirstLoading) return <h1>Loading...</h1>;
+  if (isFirstLoading) return <LoadingComponent />;
 
   // const handleSetActiveUser = (user) => {
   //   setActiveUser(user);

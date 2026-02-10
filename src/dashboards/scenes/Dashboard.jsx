@@ -7,6 +7,7 @@ import { LongestRoutegram } from "./indicators/LongestRoutegram";
 import { ShortestRoutegram } from "./indicators/ShortestRoutegram";
 import { DistanceRangeGraph } from "./indicators/DistanceRangeGraph";
 import { useAdminStore } from "../../hooks/useAdminStore";
+import { LoadingComponent } from "../components/LoadingComponent";
 
 export const Dashboard = () => {
   const {
@@ -27,7 +28,7 @@ export const Dashboard = () => {
     distanceRangeGraph,
   } = dashboardStats;
 
-  if (isLoadingDashboardStats) return <h1>Cargando...</h1>;
+  if (isLoadingDashboardStats) return <LoadingComponent />;
 
   return (
     <>
