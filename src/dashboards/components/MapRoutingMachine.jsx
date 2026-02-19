@@ -12,6 +12,9 @@ import { useRoutegramStore } from "../../hooks/useRoutegramStore";
 import { useUiStore } from "../../hooks/useUiStore";
 import { GeoJSON } from "react-leaflet";
 import { FlyToRoute } from "./FlyToRoute";
+import { CenterMapOnPosition } from "../../components/CenterMapOnPosition";
+
+const DEFAULT_CENTER = [10.4806, -66.9036];
 
 // Helper para capturar clicks en el mapa
 const MapClicker = ({ onMapClick }) => {
@@ -22,6 +25,8 @@ const MapClicker = ({ onMapClick }) => {
 };
 
 export const MapRoutingMachine = () => {
+  const [initialPointCasaTrabajo, setInitialPointCasaTrabajo] =
+    useState(DEFAULT_CENTER);
   const { activeRoute, startSavingRoutegram, startUpdatingRoutegram } =
     useRoutegramStore();
   const { typeRoutegramToEdit, closeRoutegramModal, isUpdating } = useUiStore();
@@ -128,6 +133,8 @@ export const MapRoutingMachine = () => {
 
         {/* Componente para detectar clicks */}
         <MapClicker onMapClick={handleMapClick} />
+
+        <CenterMapOnPosition setCurrentPosition={setInitialPointCasaTrabajo} />
 
         {/* Componente de Routing: Solo se activa cuando tenemos A y B */}
         {points.start && points.end && (
